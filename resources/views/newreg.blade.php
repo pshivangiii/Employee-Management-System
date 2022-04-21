@@ -59,7 +59,7 @@
             </div>
             <br>
           <label for="psw-repeat"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" >
+           <input type="password" placeholder="Enter Password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
           <div>
            @php
             foreach ($errors->get('psw-repeat') as $message) {
