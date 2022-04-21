@@ -15,7 +15,8 @@
           <label for="email"><b>Email</b></label>
           <input type="text" pattern="[^ @]*@[^ @]*" placeholder="Enter email" name="email" required>
           <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" required>
+           <input type="password" placeholder="Enter Password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+          <div>
           <a href='/employee_details'><button type="submit">Login </button></a>
         </div>
     </form>
