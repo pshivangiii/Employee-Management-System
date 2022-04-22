@@ -1,0 +1,55 @@
+
+Employee Management System (Divyansh, Shlok, Shivangi Pathak)
+
+Login + Signup + Session Management------>done
+#Employee--->done
+#Admin-------->done
+Employee CRUD with pagination-->ADD---->READ---->Update----->DELETE--->DONE    pagination--->DONE
+Employee Details---------->Done
+Salary and Attendance management of employees   --->PAYROLL DONE
+
+Some employees can be managers, under whom other employees can work, managers can access his/her teams data
+Filtering on the basis of years of exp, employee, manager assigned to employees, attendance
+
+
+//////////////////////////////////////////////////////////////////////////////////
+Some points to take care of:
+
+All queries should be in Models with Proper Form request validations
+
+Function/Variable names should be in camelCase
+
+Class names should be in TitleCase
+
+Code Formatting should be proper
+
+Raw queries should not be used anywhere (use Eloquent)
+
+
+
+
+reg---------------->done
+login--------------->logout--------->done
+create--->read--->UPDATE---->delete and pagination--->done
+Employee Details---->manager is able to view team details
+
+
+manager--->team
+emp-->team->
+manager--------------->team data
+
+salary---->done  UI left
+attendance---->
+DATE     ATTENDANCE     ID       ||            PRESENT ABSENT Id
+
+
+
+Club web routes in groups
+Study Blade Layouts
+Focus on Middleware Naming Convention
+Read on app.php
+Don't create multiple functions with same usage
+
+Different method for GET and POST
+changes in set data function, use key-value pairs along with null validation
+Study Form Request

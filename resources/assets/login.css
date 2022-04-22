@@ -1,0 +1,70 @@
+form {
+    border: 3px solid #f1f1f1;
+  }
+  
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+ 
+  button {
+    background-color: #8684f7;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+ 
+  button:hover {
+    opacity: 0.8;
+  }
+  
+ 
+  .editbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #ec8b84;
+  }
+
+  .container {
+    padding: 16px;
+  }
+  
+ .a{
+   /* color: rgb(239, 240, 240); */
+   font-weight: bolder;
+   background-color: #8662e9;
+ }
+ body {
+  background-image: url("https://w0.peakpx.com/wallpaper/47/1008/HD-wallpaper-colorful-background-ultra-aero-colorful-beautiful-yellow-green-abstract-color-design-light-background-colors-bright-colourful-shades-vivid-pastel-soft-blur-gradient-pale-8k-lightcolored.jpg");
+  /* background-image: url("https://pxt.azureedge.net/blob/68f66c3ddc3acfc4c53157abf92eace202d46db2/static/courses/csintro/conditionals/rock-paper-scissors-items.png"); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+ }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+ 
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
