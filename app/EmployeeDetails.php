@@ -119,6 +119,12 @@ class EmployeeDetails extends Model
          return $data;
     }
        
+     /**
+     * @param String $email
+     * @param String $password
+     * @param String $team
+     * @param String $designation
+     */
     public static function updateProfile($id,$email,$password,$team,$designation)
     {
         EmployeeDetails::where('email', $email)->update(['designation' => $designation]);
@@ -159,11 +165,6 @@ class EmployeeDetails extends Model
     {
         $data=EmployeeDetails::where(['team'=>$team])->get();
         return $data;
-    }
-
-    public static function searchData($search){
-    $data=EmployeeDetails::where('team',$search)->get();
-     return $data;
     }
 }
 
