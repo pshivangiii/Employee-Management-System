@@ -19,10 +19,6 @@ use App\Info;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //Main dashboard of project
 Route::get('/dashboard','RegisterController@showDashboard');
 
@@ -84,28 +80,5 @@ Route::post('/newadminlogin','LoginController@authenticateAdminLogin');
 
 Route::get('/logout','LoginController@showLogoutPage'); 
 Route::post('/logout','LoginController@logout'); 
-
-
-
-
-
-Route::get('/page','LoginController@page'); 
-Route::get('/demo/{email}','NewRegistrationController@demo');
-Route::get('/search','SearchController@filterview');
-Route::post('/search','SearchController@postFilterview');
-Route::get('/paginate','FeaturesController@paginate');
- // Route::get('attendance/{email}','AttendanceController@index');
-    // Route::post('attendance/{id}','AttendanceController@postIndex');
-    // Route::get('att','AttendanceController@getAttendance');
-     // Route::get('user', function () {
-    //         return view('userDetails');
-    //     });
-      // Route::get('/employee_details/{id}','EmployeeController@getDetails');
-    // Route::post('/employee_details/{id}','EmployeeController@postEmployeeDetails');
-    // Route::get('/team','EmployeeController@view');
-    // Route::get('/editrecords','EmployeeController@viewEmployees');
-    // Route::get('/profile/{id}','EmployeeController@viewProfile');
-    
-    // Route::get('pv','FeaturesController@getPaginateView');
 
 
