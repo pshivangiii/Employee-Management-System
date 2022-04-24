@@ -61,10 +61,8 @@ class AttendanceController extends Controller
         try
         {
             $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
             $attendance = $request->input('attendance');
-            EmployeeDetails::updateData($id,$email,$password,$team,$attendance);
+            EmployeeDetails::markAttendance($email,$attendance);
             echo "Attendance updated successfully.";
         }
         catch (\Exception $e) 
