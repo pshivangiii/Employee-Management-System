@@ -8,6 +8,15 @@ class EmployeeDetails extends Model
 {
     protected $table="employee_details";
     protected $primaryKey="id";
+    protected $fillable = [
+        'id',
+        'email',
+        'password',
+        'team',
+        'designation',
+        'pending_requests',
+        'approved_requests'
+    ];
 
     /**
      * @param String $email
@@ -17,12 +26,15 @@ class EmployeeDetails extends Model
      */
     public static function registrationModel($email,$password,$team,$designation)
     {
-       $reg=new EmployeeDetails();
-       $reg->email=$email;
-       $reg->password=$password;
-       $reg->team=$team;
-       $reg->designation=$designation;
-       $reg->save();
+       if((!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($designation)))
+       {
+        $reg=new EmployeeDetails();
+        $reg->email=$email;
+        $reg->password=$password;
+        $reg->team=$team;
+        $reg->designation=$designation;
+        $reg->save();
+       }
     }
 
      /**
@@ -32,6 +44,8 @@ class EmployeeDetails extends Model
      */
     public static function login($email,$password,$request)
     {
+        if((!empty($email)) && (!empty($password)))  
+        {
          $check=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
         
          if(count($check)>0)
@@ -42,6 +56,7 @@ class EmployeeDetails extends Model
                     $users=compact('users');
                     return $users;
                 }
+        }        
     }
 
      /**
@@ -50,6 +65,10 @@ class EmployeeDetails extends Model
      */
     public static function getLogin($email,$request)
     {
+        if(empty($email))
+        {
+            return "EMAIL NEEDED!";
+        }
         $check=EmployeeDetails::where(['email'=>$email])->get();
         
         if(count($check)>0)
@@ -66,6 +85,10 @@ class EmployeeDetails extends Model
      */
     public static function getEmployeeData($email)
     {
+        if(empty($email))
+        {
+            return "EMAIL NEEDED!";
+        }
         $data = EmployeeDetails::where('email', $email)->first();
         return $data;
     }
@@ -76,11 +99,14 @@ class EmployeeDetails extends Model
      */
     public static function find($email,$password)
     {
-         $users=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
+        if((!empty($email)) && (!empty($password)))
+        {
+          $users=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
           if(!empty($users))
             {
               return $email;
             }
+        }    
     }
 
     public static function allDatap()
@@ -97,7 +123,10 @@ class EmployeeDetails extends Model
         
     public static function updateData($id,$email,$password,$team,$attendance)
     {
-         EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+        if((!empty($id)) && (!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($attendance)))
+        {
+            EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+        }
            
     }
 
@@ -106,6 +135,10 @@ class EmployeeDetails extends Model
      */
     public static function specificData($email)
     {
+        if(empty($email))
+        {
+            return "EMAIL NEEDED!";
+        }
         $data = EmployeeDetails::where('email', $email)->get();
         return $data;
     }
@@ -115,6 +148,10 @@ class EmployeeDetails extends Model
      */
     public static function dataById($id)
     {
+        if(empty($id))
+        {
+            return "ID NEEDED!";
+        }
         $data = EmployeeDetails::where('id', $id)->get();
          return $data;
     }
@@ -127,9 +164,12 @@ class EmployeeDetails extends Model
      */
     public static function updateProfile($id,$email,$password,$team,$designation)
     {
-        EmployeeDetails::where('email', $email)->update(['designation' => $designation]);
-        EmployeeDetails::where('email', $email)->update(['team' => $team]);
-        EmployeeDetails::where('email', $email)->update(['password' => $password]);
+        if((!empty($id)) && (!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($designation)))
+        {
+            EmployeeDetails::where('email', $email)->update(['designation' => $designation]);
+            EmployeeDetails::where('email', $email)->update(['team' => $team]);
+            EmployeeDetails::where('email', $email)->update(['password' => $password]);
+        }
     }
 
     public static function approval()
@@ -145,8 +185,11 @@ class EmployeeDetails extends Model
      */
     public static function updateAttendance($email,$attendance,$approved)
     {
-        EmployeeDetails::where('email', $email)->update(['approved_requests' => $approved]);
-        EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+        if((!empty($email)) && (!empty($attendance)) && (!empty($approved)))
+        {
+            EmployeeDetails::where('email', $email)->update(['approved_requests' => $approved]);
+            EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+        }
     }
 
      /**
@@ -154,6 +197,10 @@ class EmployeeDetails extends Model
      */
     public static function deleteData($id)
     {
+        if(empty($id))
+        {
+            return "ID NEEDED!";
+        }
         $data = EmployeeDetails::where('id', $id)->delete();
         return $data;
     }
@@ -163,6 +210,10 @@ class EmployeeDetails extends Model
      */
     public static function viewTeam($team)
     {
+        if(empty($team))
+        {
+            return "TEAM NEEDED!";
+        }
         $data=EmployeeDetails::where(['team'=>$team])->get();
         return $data;
     }
