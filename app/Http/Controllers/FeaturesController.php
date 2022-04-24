@@ -30,17 +30,6 @@ class FeaturesController extends Controller
     }
     public function addUserPost(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email'
-            // 'email' => 'required|unique:posts|max:255',
-            // 'psw' => 'required_with:password_confirmation|same:psw-repeat',
-            // 'psw' => 'required|psw',
-            // 'psw-repeat' => 'required|psw_repeat'
-            ]);
-      
-        // print_r($request->input('email'));
-        // $name = $request->input('email');
-        // return $request->all();
         try
         {
             $email=$request->input('email');
@@ -124,7 +113,7 @@ class FeaturesController extends Controller
     {
         try
         {
-            $users=EmployeeDetails::specificData($email);
+            $users=EmployeeDetails::getEmployeeDetails($email);
             return view('viewOwnProfile',['users'=>$users]); 
         }
         catch (\Exception $e) 
