@@ -121,9 +121,9 @@ class EmployeeDetails extends Model
         return $users;
     }
         
-    public static function updateData($id,$email,$password,$team,$attendance)
+    public static function markAttendance($email,$attendance)
     {
-        if((!empty($id)) && (!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($attendance)))
+        if((!empty($email)) && (!empty($attendance)))
         {
             EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
         }
