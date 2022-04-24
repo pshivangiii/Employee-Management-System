@@ -11,10 +11,11 @@ use Session;
 
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 
 class FeaturesController extends Controller
 { 
-    public function addUser(Request $request)
+    public function viewAddUserPage()
     {
         try
         {
@@ -28,10 +29,11 @@ class FeaturesController extends Controller
             );
         }
     }
-    public function addUserPost(Request $request)
+    public function addUserPost(RegisterRequest $request)
     {
         try
         {
+            $request->validate();
             $email=$request->input('email');
             $password=$request->input('psw');
             $team=$request->input('team');
@@ -62,7 +64,7 @@ class FeaturesController extends Controller
             );
         }
     }
-    public function deleteEmployee(Request $request,$id)
+    public function deleteEmployee($id)
     {
         try
         {
@@ -78,7 +80,7 @@ class FeaturesController extends Controller
         }
     
     }
-    public function showAllEmployees(Request $request)
+    public function showAllEmployees()
     {
         try
         {
@@ -109,7 +111,7 @@ class FeaturesController extends Controller
         }
     }
 
-    public function viewProfile(Request $request,$email)
+    public function viewProfile($email)
     {
         try
         {
@@ -124,7 +126,7 @@ class FeaturesController extends Controller
             );
         }
     }
-    public function showDetails(Request $request,$email)
+    public function showDetails($email)
     {
         try
         {
