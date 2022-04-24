@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     {
         try
         {
-            $users=EmployeeDetails::specificData($email);
+            $users=EmployeeDetails::getEmployeeData($email);
             return view('update',['users'=>$users]);
         }
         catch (\Exception $e) 
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
     }
 
     //VIEW TEAM'S DATA IF YOU'RE A MANAGER
-    public function myTeam(Request $request,$team)
+    public function myTeam($team)
     {
         try
         {
