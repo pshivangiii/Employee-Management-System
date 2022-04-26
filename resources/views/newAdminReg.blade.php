@@ -10,7 +10,7 @@
   </head>
   <body style="text-align:center;">  
     <h1> REGISTRATION FORM </h1>
-    <form class ="row g-3" action="{{url('/')}}/newadminreg" method="POST">
+    <form class ="row g-3" action="{{url('/')}}/adminRegistration" method="POST">
       
       {{ csrf_field() }}
         <div class="container">
