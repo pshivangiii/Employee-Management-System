@@ -4,10 +4,11 @@ use Illuminate\support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 use  App\Http\Controllers\RegController;
-use App\Http\Middleware\CheckPage;
+
+// use App\Jobs\SendWelcomeEmailJob;
 
 use App\Info;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,10 @@ use App\Info;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 //Main dashboard of project
 Route::get('/dashboard','RegisterController@showDashboard');
@@ -53,7 +58,7 @@ Route::group(['middleware'=>'session'],function(){
     Route::post('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
 
     //To add a new user
-    Route::get('/adduser','FeaturesController@addUser');
+    Route::get('/adduser','FeaturesController@viewAddUserPage');
     Route::post('/adduser','FeaturesController@addUserPost');
 
     //Edit Employee's details
@@ -62,20 +67,21 @@ Route::group(['middleware'=>'session'],function(){
 
 });
 
-Route::get('/newreg','RegisterController@showRegPage');
-Route::post('/newreg','RegisterController@registerAuthenticate');
+
+Route::get('/registration','RegisterController@showRegPage');
+Route::post('/registration','RegisterController@registerAuthenticate');
 
 
-Route::get('/newlogin','LoginController@showLoginPage');
-Route::post('/newlogin','LoginController@authenticateLogin');
+Route::get('/login','LoginController@showLoginPage');
+Route::post('/login','LoginController@authenticateLogin');
 
 
-Route::get('/newadminreg','RegisterController@viewRegistrationPage');
-Route::post('/newadminreg','RegisterController@authenticateRegistration');
+Route::get('/adminRegistration','RegisterController@viewRegistrationPage');
+Route::post('/adminRegistration','RegisterController@authenticateRegistration');
 
 
-Route::get('/newadminlogin','LoginController@showAdminLogin');
-Route::post('/newadminlogin','LoginController@authenticateAdminLogin');
+Route::get('/adminLogin','LoginController@showAdminLogin');
+Route::post('/adminLogin','LoginController@authenticateAdminLogin');
 
 
 Route::get('/logout','LoginController@showLogoutPage'); 
