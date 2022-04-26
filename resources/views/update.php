@@ -39,7 +39,7 @@
                 <td colspan = '2'>
                 <input type = 'submit' value = "Update Details" />
                 </td>
-                </tr>
+            </tr>
         </table>
       </form>
     </body>
