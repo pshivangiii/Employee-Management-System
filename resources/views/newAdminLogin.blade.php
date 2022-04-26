@@ -9,7 +9,7 @@
   </head>
   <body style="text-align:center;">  
     <h1>ADMIN LOGIN </h1>
-    <form class ="row g-3" action="{{url('/')}}/newadminlogin" method="POST">
+    <form class ="row g-3" action="{{url('/')}}/adminLogin" method="POST">
         {{ csrf_field() }}
        
         <div class="container">
