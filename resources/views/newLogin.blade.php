@@ -9,7 +9,7 @@
   </head>
   <body style="text-align:center;">
     <h1> LOGIN </h1>
-    <form class ="row g-3" action="{{url('/')}}/newlogin" method="POST">
+    <form class ="row g-3" action="{{url('/')}}/login" method="POST">
         {{ csrf_field() }}
         <div class="container">
           <label for="email"><b>Email</b></label>
