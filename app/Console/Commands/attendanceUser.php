@@ -38,6 +38,6 @@ class attendanceUser extends Command
      */
     public function handle()
     { 
-        $this->info( "Please Regularise Your Attendance");
+        $this->info( "Please Regularise Your Attendance"); 
     }
 }
