@@ -12,10 +12,10 @@
     <form class ="row g-3" action="{{url('/')}}/search" method="POST">
       {{ csrf_field() }}
         <div class="container">
-            <h2 style="background-color:#a2bce7;">USERS:</h2><br>
+            <h2>Search:</h2><br>
             <div>
                 <label for="search"><b>Search</b></label>
-                <input style="background-color:#ddd8c2;" type="text" placeholder="Enter Search" name="search" id="search" >
+                <input style="background-color:#bdbcb8;" type="text" placeholder="Enter Search" name="search" id="search" >
                 <button id = "bt" type="submit" >SEARCH</button>
                 </div><br>
             <table class="table table-bordered table-striped">
