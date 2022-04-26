@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:50',
+            'email' => 'required|email|unique:employee_details|max:50',
             'psw' =>  'required|min:6|max:15',
             'psw-repeat' => 'required|min:6|max:15|same:psw',
         ];
