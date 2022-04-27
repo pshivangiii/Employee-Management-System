@@ -17,31 +17,21 @@ class FeaturesController extends Controller
 { 
     public function viewAddUserPage()
     {
-        try
-        {
-            return view('addUser');
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
+        return view('addUser');
     }
     public function addUser(RegisterRequest $request)
     {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('psw');
+        $team=$request->input('team');
+        $designation=$request->input('designation');
         try
         {
-            $request->validate();
-            $email=$request->input('email');
-            $password=$request->input('psw');
-            $team=$request->input('team');
-            $designation=$request->input('designation');
             EmployeeDetails::registrationModel($email,$password,$team,$designation); 
             return "NEW EMPLOYEE ADDED";
         }
-    catch (\Exception $e) 
+        catch (\Exception $e) 
         {
             return redirect('error')->with
             (
@@ -54,7 +44,6 @@ class FeaturesController extends Controller
         try
         {
             $data=EmployeeDetails::AllData();
-            return view('userDetails',['data'=> $data]);
         }
         catch (\Exception $e) 
         {
@@ -63,6 +52,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('userDetails',['data'=> $data]);
     }
     public function deleteEmployee($id)
     {
@@ -84,8 +74,7 @@ class FeaturesController extends Controller
     {
         try
         {
-            $users=EmployeeDetails::AllDatap();
-            return view('paginateView',['users'=> $users]);
+            $users=EmployeeDetails::paginatedData();
         }
         catch (\Exception $e) 
         {
@@ -94,21 +83,12 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('paginateView',['users'=> $users]);
     }
 
     public function getPayroll()
     {
-        try
-        {
-            return view('payroll');
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
+        return view('payroll');
     }
 
     public function viewProfile($email)
@@ -116,7 +96,6 @@ class FeaturesController extends Controller
         try
         {
             $users=EmployeeDetails::getEmployeeDetails($email);
-            return view('viewOwnProfile',['users'=>$users]); 
         }
         catch (\Exception $e) 
         {
@@ -125,13 +104,13 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('viewOwnProfile',['users'=>$users]); 
     }
     public function showDetails($email)
     {
         try
         {
             $users=EmployeeDetails::getEmployeeData($email);
-            return view('updateOwnProfile',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -140,15 +119,16 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('updateOwnProfile',['users'=>$users]);
     }
     public function editOwnProfile(Request $request,$id)
     {
+        $email = $request->input('email');
+        $password = $request->input('psw');
+        $team = $request->input('team');
+        $designation = $request->input('designation');
         try
         {
-            $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
-            $designation = $request->input('designation');
             EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
             echo "Profile updated successfully.";
         }

@@ -16,7 +16,6 @@ class EmployeeController extends Controller
         try
         {
             $users=EmployeeDetails::allData();
-            return view('updateEmp',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -25,6 +24,7 @@ class EmployeeController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('updateEmp',['users'=>$users]);
     }
 
     public function showEmployeeDetail(Request $request,$email) 
@@ -32,7 +32,6 @@ class EmployeeController extends Controller
         try
         {
             $users=EmployeeDetails::getEmployeeData($email);
-            return view('update',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -40,17 +39,18 @@ class EmployeeController extends Controller
             (
                'error', $e->getMessage()
             );
-        }    
+        } 
+        return view('update',['users'=>$users]);   
     }
 
     public function editDetails(Request $request,$id)
     {
+        $email = $request->input('email');
+        $password = $request->input('psw');
+        $team = $request->input('team');
+        $designation = $request->input('designation');
         try
         {
-            $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
-            $designation = $request->input('designation');
             EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
             echo "Record updated successfully.";
         }
@@ -69,7 +69,6 @@ class EmployeeController extends Controller
         try
         {
             $users=EmployeeDetails::viewTeam($team);
-            return view('myteam',['users'=>$users]); 
         }
         catch (\Exception $e) 
         {
@@ -77,7 +76,8 @@ class EmployeeController extends Controller
             (
                'error', $e->getMessage()
             );
-        }    
+        }  
+        return view('myteam',['users'=>$users]);    
     }
 }
 
