@@ -254,19 +254,5 @@ class EmployeeDetails extends Model
         $data=EmployeeDetails::whereBetween('id', [$id-5,$id])->get();
         return $data;
     }
-     /**
-     * @param String $email
-     * @param String $password
-     */
-    public static function loginUser($email,$password,$request)
-    {
-        $check=EmployeeDetails::where(['email'=>$email])->get();
-        if(count($check)>0)
-           {
-                $users=EmployeeDetails::where(['email'=>$email])->get();
-                $users=compact('users');
-                return $users;
-            }
-    }
 }
 
