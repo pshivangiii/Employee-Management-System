@@ -29,7 +29,7 @@ class FeaturesController extends Controller
             );
         }
     }
-    public function addUserPost(RegisterRequest $request)
+    public function addUser(RegisterRequest $request)
     {
         try
         {
