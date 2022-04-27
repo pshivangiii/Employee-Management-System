@@ -13,7 +13,6 @@ class PayrollController extends Controller
        try
         {
            $users=EmployeeDetails::getEmployeeData($email);
-           return view('payrollDetails',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -22,5 +21,6 @@ class PayrollController extends Controller
                 'error', $e->getMessage()
             );
         }
+        return view('payrollDetails',['users'=>$users]);
     }
 }
