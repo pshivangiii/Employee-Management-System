@@ -18,7 +18,7 @@
    }
   </style>
     <h3> ADD USER</h3>
-    <form class ="row g-3" action="{{url('/')}}/adduser" method="POST"> 
+    <form class ="row g-3" action="{{url('/')}}/userPortal" method="POST"> 
       {{ csrf_field() }}
         <div class="container">
           <label for="email"><b>Email</b></label>
