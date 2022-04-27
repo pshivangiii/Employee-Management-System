@@ -25,7 +25,7 @@
           <a class="nav-link" href="/show">Delete User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/showEmployees">View Users</a>
+          <a class="nav-link" href="/showEmployees">View Users</a> 
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/show">Edit </a>
