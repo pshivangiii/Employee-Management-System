@@ -41,8 +41,8 @@ Route::group(['middleware'=>'session'],function(){
 
     //Apply Attendance
     Route::get('/attendancePortal/{email}','AttendanceController@showAttendancePortal');
-    Route::get('final/{id}','AttendanceController@markAttendance');
-    Route::post('final/{id}','AttendanceController@submitAttendance');
+    Route::get('markAttendance/{id}','AttendanceController@markAttendance');
+    Route::post('markAttendance/{id}','AttendanceController@submitAttendance');
 
     //Approve Attendance
     Route::get('/showAttendanceRequests','AttendanceController@showAttendanceRequests');
