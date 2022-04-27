@@ -50,7 +50,7 @@ Route::group(['middleware'=>'session'],function(){
     Route::post('/approve_attendance/{email}','AttendanceController@approveAttendance');
 
     //Show list of employees 
-    Route::get('/allEmployees','FeaturesController@showAllEmployees');
+    Route::get('/showEmployees','FeaturesController@showAllEmployees');
 
     //Show and edit details
     Route::get('/ownprofile/{email}','FeaturesController@viewProfile');
