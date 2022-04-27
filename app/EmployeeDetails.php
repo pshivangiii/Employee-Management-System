@@ -133,7 +133,7 @@ class EmployeeDetails extends Model
      /**
      * @param String $email
      */
-    public static function specificData($email)
+    public static function getEmployeeDetails($email)
     {
         if(empty($email))
         {
@@ -216,6 +216,57 @@ class EmployeeDetails extends Model
         }
         $data=EmployeeDetails::where(['team'=>$team])->get();
         return $data;
+    }
+    //SEARCH FUNCTION 
+     /**
+     * @param String $search
+     */
+    public static function searchData($search)  
+    {
+         $data=EmployeeDetails::where('team',$search)
+                            ->orWhere('designation',$search)
+                            ->orWhere('email',$search)
+                            ->orWhere('id',$search)->get();
+         return $data;
+    }
+    //PAGINATION ON LIST OF USERS
+     /**
+     * @param String $id
+     */
+    public static function showUsers($id)
+    {
+            $data=EmployeeDetails::limit($id)->get();
+            return $data;
+    }
+     /**
+     * @param String $id
+     */
+    public static function nextUsers($id)
+    {
+        $data=EmployeeDetails::whereBetween('id', [$id,$id+5])->get();
+        return $data;
+    }
+     /** 
+     * @param String $id
+     */
+    public static function prevUsers($id)
+    {
+        $data=EmployeeDetails::whereBetween('id', [$id-5,$id])->get();
+        return $data;
+    }
+     /**
+     * @param String $email
+     * @param String $password
+     */
+    public static function loginUser($email,$password,$request)
+    {
+        $check=EmployeeDetails::where(['email'=>$email])->get();
+        if(count($check)>0)
+           {
+                $users=EmployeeDetails::where(['email'=>$email])->get();
+                $users=compact('users');
+                return $users;
+            }
     }
 }
 
