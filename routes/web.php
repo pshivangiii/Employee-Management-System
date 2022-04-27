@@ -45,7 +45,7 @@ Route::group(['middleware'=>'session'],function(){
     Route::post('final/{id}','AttendanceController@submitAttendance');
 
     //Approve Attendance
-    Route::get('/approval','AttendanceController@showAttendanceRequests');
+    Route::get('/showAttendanceRequests','AttendanceController@showAttendanceRequests');
     Route::get('/approve_attendance/{email}','AttendanceController@showRequestDetail');
     Route::post('/approve_attendance/{email}','AttendanceController@approveAttendance');
 
