@@ -58,8 +58,8 @@ Route::group(['middleware'=>'session'],function(){
     Route::post('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
 
     //To add a new user
-    Route::get('/adduser','FeaturesController@viewAddUserPage');
-    Route::post('/adduser','FeaturesController@addUserPost');
+    Route::get('/userPortal','FeaturesController@viewAddUserPage');
+    Route::post('/userPortal','FeaturesController@addUser');
 
     //Edit Employee's details
     Route::get('edit/{email}','EmployeeController@showEmployeeDetail');
