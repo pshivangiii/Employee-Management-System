@@ -31,7 +31,7 @@
           <a class="nav-link" href="/show">Edit </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=/approval>Approve_Attendance</a>
+          <a class="nav-link" href=/showAttendanceRequests>Approve_Attendance</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout"><b>Logout</b></a>
