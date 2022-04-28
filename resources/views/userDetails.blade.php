@@ -9,6 +9,11 @@
     <title>USER DETAILS</title>
   </head>
   <body>
+    @if (session('status'))
+      <div class="alert alert-success" role="alert">
+         <p> Deleted Successfully </p>
+      </div>
+    @endif
     <form class ="row g-3" action="{{url('/')}}/show" method="POST">
       {{ csrf_field() }}
         <div class="container">
