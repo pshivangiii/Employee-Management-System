@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Exception;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,15 +27,16 @@ class EmployeeDetails extends Model
      */
     public static function registrationModel($email,$password,$team,$designation)
     {
-       if((!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($designation)))
+       if((empty($email)) || (empty($password)) || (empty($team)) || (empty($designation)))
        {
+        throw new Exception("Problem occured in Registeration!");
+       } 
         $reg=new EmployeeDetails();
         $reg->email=$email;
         $reg->password=$password;
         $reg->team=$team;
-        $reg->designation=$designation;
+        $reg->designation=$designation; 
         $reg->save();
-       }
     }
 
      /**
@@ -44,37 +46,34 @@ class EmployeeDetails extends Model
      */
     public static function login($email,$password,$request)
     {
-        if((!empty($email)) && (!empty($password)))  
+        if((empty($email)) || (empty($password)))  
         {
-         $check=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
-        
+            throw new Exception("Login Failed!");
+        }
+         $check=Self::where(['email'=>$email,'password'=>$password])->get();
          if(count($check)>0)
-        
                 {
-                    $users=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
+                    $users=$check;
                     $request->session()->put('email',$email);
                     $users=compact('users');
                     return $users;
-                }
-        }        
+                }      
     }
 
      /**
      * @param String $email
-     * @param $request
      */
-    public static function getLogin($email,$request)
+    public static function getLogin($email)
     {
         if(empty($email))
         {
-            return "EMAIL NEEDED!";
+            throw new Exception("Please provide email to continue!");
         }
-        $check=EmployeeDetails::where(['email'=>$email])->get();
-        
+        $check=Self::where(['email'=>$email])->get();
         if(count($check)>0)
        
                {
-                   $users=EmployeeDetails::where(['email'=>$email])->get();
+                   $users=$check;
                    $users=compact('users');
                    return $users;
                }
@@ -87,9 +86,9 @@ class EmployeeDetails extends Model
     {
         if(empty($email))
         {
-            return "EMAIL NEEDED!";
+            throw new Exception("Employee detials could not be fetched!");
         }
-        $data = EmployeeDetails::where('email', $email)->first();
+        $data = Self::where('email', $email)->first();
         return $data;
     }
 
@@ -99,35 +98,36 @@ class EmployeeDetails extends Model
      */
     public static function find($email,$password)
     {
-        if((!empty($email)) && (!empty($password)))
+        if((empty($email)) || (empty($password)))
         {
-          $users=EmployeeDetails::where(['email'=>$email,'password'=>$password])->get();
+            throw new Exception("Please Enter Valid Details!");
+        }
+          $users=Self::where(['email'=>$email,'password'=>$password])->get();
           if(!empty($users))
             {
               return $email;
-            }
-        }    
+            }   
     }
 
-    public static function allDatap()
+    public static function paginatedData()
     {
-        $users=EmployeeDetails::paginate(3);
+        $users=Self::paginate(3);
         return $users;
     }
 
     public static function allData()
     {
-        $users=EmployeeDetails::all();
+        $users=Self::all();
         return $users;
     }
         
     public static function markAttendance($email,$attendance)
     {
-        if((!empty($email)) && (!empty($attendance)))
+        if((empty($email)) || (empty($attendance)))
         {
-            EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+            throw new Exception("Could not mark Attendance!");
         }
-           
+        Self::where('email', $email)->update(['pending_requests' => $attendance]);
     }
 
      /**
@@ -137,9 +137,9 @@ class EmployeeDetails extends Model
     {
         if(empty($email))
         {
-            return "EMAIL NEEDED!";
+            throw new Exception("Details cannot be fetched!");
         }
-        $data = EmployeeDetails::where('email', $email)->get();
+        $data = Self::where('email', $email)->get();
         return $data;
     }
 
@@ -150,10 +150,10 @@ class EmployeeDetails extends Model
     {
         if(empty($id))
         {
-            return "ID NEEDED!";
+            throw new Exception("No employee found for this id!");
         }
-        $data = EmployeeDetails::where('id', $id)->get();
-         return $data;
+        $data =Self::where('id', $id)->get();
+        return $data;
     }
        
      /**
@@ -164,17 +164,18 @@ class EmployeeDetails extends Model
      */
     public static function updateProfile($id,$email,$password,$team,$designation)
     {
-        if((!empty($id)) && (!empty($email)) && (!empty($password)) && (!empty($team)) && (!empty($designation)))
-        {
-            EmployeeDetails::where('email', $email)->update(['designation' => $designation]);
-            EmployeeDetails::where('email', $email)->update(['team' => $team]);
-            EmployeeDetails::where('email', $email)->update(['password' => $password]);
+        if((empty($id)) || (empty($email)) || (empty($password)) || (empty($team)) || (empty($designation)))
+        {  
+            throw new Exception("Profile couldn't be updated!");
         }
+        Self::where('email', $email)->update(['designation' => $designation]);
+        Self::where('email', $email)->update(['team' => $team]);
+        Self::where('email', $email)->update(['password' => $password]);
     }
 
     public static function approval()
     {
-        $data=EmployeeDetails::all()->where('pending_requests','>','0');
+        $data=Self::all()->where('pending_requests','>','0');
         return $data;
     }
 
@@ -185,11 +186,12 @@ class EmployeeDetails extends Model
      */
     public static function updateAttendance($email,$attendance,$approved)
     {
-        if((!empty($email)) && (!empty($attendance)) && (!empty($approved)))
+        if((empty($email)) || (empty($attendance)) || (empty($approved)))
         {
-            EmployeeDetails::where('email', $email)->update(['approved_requests' => $approved]);
-            EmployeeDetails::where('email', $email)->update(['pending_requests' => $attendance]);
+            throw new Exception("Could not update Attendance!");
         }
+        Self::where('email', $email)->update(['approved_requests' => $approved]);
+        Self::where('email', $email)->update(['pending_requests' => $attendance]);
     }
 
      /**
@@ -199,9 +201,9 @@ class EmployeeDetails extends Model
     {
         if(empty($id))
         {
-            return "ID NEEDED!";
+            throw new Exception("Data couldn't be deleted!"); 
         }
-        $data = EmployeeDetails::where('id', $id)->delete();
+        $data = Self::where('id', $id)->delete();
         return $data;
     }
 
@@ -211,10 +213,10 @@ class EmployeeDetails extends Model
     public static function viewTeam($team)
     {
         if(empty($team))
-        {
-            return "TEAM NEEDED!";
+        {   
+            throw new Exception("You dont have access!");
         }
-        $data=EmployeeDetails::where(['team'=>$team])->get();
+        $data=Self::where(['team'=>$team])->get();
         return $data;
     }
     //SEARCH FUNCTION 
@@ -223,35 +225,14 @@ class EmployeeDetails extends Model
      */
     public static function searchData($search)  
     {
-         $data=EmployeeDetails::where('team',$search)
+        if(empty($search))
+        {
+            throw new Exception("Please enter valid search!");
+        }
+        $data=Self::where('team',$search)
                             ->orWhere('designation',$search)
                             ->orWhere('email',$search)
                             ->orWhere('id',$search)->get();
-         return $data;
-    }
-    //PAGINATION ON LIST OF USERS
-     /**
-     * @param String $id
-     */
-    public static function showUsers($id)
-    {
-            $data=EmployeeDetails::limit($id)->get();
-            return $data;
-    }
-     /**
-     * @param String $id
-     */
-    public static function nextUsers($id)
-    {
-        $data=EmployeeDetails::whereBetween('id', [$id,$id+5])->get();
-        return $data;
-    }
-     /** 
-     * @param String $id
-     */
-    public static function prevUsers($id)
-    {
-        $data=EmployeeDetails::whereBetween('id', [$id-5,$id])->get();
         return $data;
     }
 }
