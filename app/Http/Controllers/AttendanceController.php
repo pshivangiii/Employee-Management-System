@@ -60,7 +60,7 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
-        return redirect('/login')->with('status', 'attendance marked successfully');
+        return redirect('/login')->with('status', 'Updated Successfully');
      }
 
     public function showAttendanceRequests()
@@ -114,6 +114,6 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
-        return redirect('/showAttendanceRequests')->with('status', 'attendance updated successfully');
+        return redirect('/showAttendanceRequests')->with('status', 'Updated Successfully');
      }
 }
