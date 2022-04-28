@@ -14,54 +14,6 @@ use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
 {
-     //Show users based with manual paginator
-    public function showUsers()
-    {
-       try
-       {  
-           $id=5;
-           $data=EmployeeDetails::showUsers($id);
-           return view('showUsers',['data'=> $data]);
-       }
-       catch (\Exception $e) 
-       {
-           return redirect('error')->with
-           (
-              'error', $e->getMessage()
-           );
-       }
-    }
-    public function nextUsers($id)
-    {
-        try
-        {
-            $data=EmployeeDetails::nextUsers($id);
-            return view('showUsers',['data'=> $data]);
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
-    public function prevUsers($id)
-    {
-        try
-        {
-            $data=EmployeeDetails::prevUsers($id);
-            return view('showUsers',['data'=> $data]);
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
-
     // Custom search Filter with pagination
     public function showFilter(Request $request)
     {
