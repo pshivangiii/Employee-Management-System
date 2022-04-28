@@ -43,7 +43,7 @@ class FeaturesController extends Controller
     {
         try
         {
-            $users=EmployeeDetails::allData();
+            $users=EmployeeDetails::paginatedData();
         }
         catch (\Exception $e) 
         {
