@@ -17,18 +17,17 @@ class AdminDetails extends Model
         $reg->save();
     }
     
-    public static function authenticateLogin($email,$password,$request)
+    public static function authenticateLogin($email,$password)
     {
         $check=AdminDetails::where(['email'=>$email,'password'=>$password])->get();
         if(count($check)>0)
         {
             $users=AdminDetails::where(['email'=>$email,'password'=>$password])->get();
-            $request->session()->put('email',$email);
             $users=compact('users');
             return $users;
         }
     }    
-    public static function enableLogin($email,$request)
+    public static function enableLogin($email)
     {
          $check=AdminDetails::where(['email'=>$email])->get();
          if(count($check)>0)
