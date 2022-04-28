@@ -16,21 +16,14 @@ class RegisterController extends Controller
     }
     public function registerAuthenticate(RegisterRequest $request)
     {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('psw'); 
+        $team=$request->input('team');
+        $designation=$request->input('designation'); 
         try
         {
-            $request->validate();
- 
-            $email=$request->input('email');
-
-            $password=$request->input('psw');
-    
-            $team=$request->input('team');
-    
-            $designation=$request->input('designation');
-
             EmployeeDetails::registrationModel($email,$password,$team,$designation);
-
-            return view('newlogin');
         }
         catch (\Exception $e) 
         {
@@ -39,6 +32,7 @@ class RegisterController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('newlogin');
     } 
     public function viewRegistrationPage()
     {
@@ -46,14 +40,12 @@ class RegisterController extends Controller
     }
     public function authenticateRegistration(RegisterRequest $request)
     {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('psw');
         try
         {
-            $request->validate();
-            $email=$request->input('email');
-
-            $password=$request->input('psw');
             AdminDetails::adminregistrationModel($email,$password);
-            return view('newAdminLogin');
         }
         catch (\Exception $e) 
         {
@@ -62,6 +54,7 @@ class RegisterController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('newAdminLogin');
     }
     public function showDashboard()
     {
