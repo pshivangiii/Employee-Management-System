@@ -52,7 +52,6 @@ class EmployeeController extends Controller
         try
         {
             EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
-            echo "Record updated successfully.";
         }
         catch (\Exception $e) 
         {
@@ -61,6 +60,7 @@ class EmployeeController extends Controller
                'error', $e->getMessage()
             );
         }
+        return "Record updated successfully."; 
     }
 
     //VIEW TEAM'S DATA IF YOU'RE A MANAGER
