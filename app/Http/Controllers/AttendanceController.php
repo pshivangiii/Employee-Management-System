@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
-    public function getAttendance()
-     {
-        try
+    public function showAttendancePortal($email)
+     { 
+        try 
         {
-            return view('attendancePortal');
+            $users=EmployeeDetails::getEmployeeDetails($email);
         }
         catch (\Exception $e) 
         {
@@ -22,22 +22,7 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
-     }
-
-    public function showAttendancePortal(Request $request,$email)
-     {
-        try
-        {
-            $users=EmployeeDetails::specificDataa($email);
-            return view('calendar',['users'=>$users]);
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
+        return view('calendar',['users'=>$users]);
      }
 
     public function markAttendance($id)
@@ -45,7 +30,6 @@ class AttendanceController extends Controller
         try
         {
             $users=EmployeeDetails::dataById($id);
-            return view('newfinal',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -54,6 +38,7 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('newfinal',['users'=>$users]);
      }
 
     public function submitAttendance(Request $request,$id) 
@@ -63,7 +48,6 @@ class AttendanceController extends Controller
             $email = $request->input('email');
             $attendance = $request->input('attendance');
             EmployeeDetails::markAttendance($email,$attendance);
-            echo "Attendance updated successfully.";
         }
         catch (\Exception $e) 
         {
@@ -72,6 +56,7 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
+        return "Attendance marked successfully!";
      }
 
     public function showAttendanceRequests()
@@ -79,7 +64,6 @@ class AttendanceController extends Controller
         try
         {
             $users=EmployeeDetails::approval();
-            return view('approveRequest',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -88,14 +72,14 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('approveRequest',['users'=>$users]);
      }
 
-    public function showRequestDetail(Request $request,$email) 
+    public function showRequestDetail($email) 
      {
         try
         {
-            $users=EmployeeDetails::specificDataa($email);
-            return view('approveAttendance',['users'=>$users]);    
+            $users=EmployeeDetails::getEmployeeDetails($email);
         }  
         catch (\Exception $e) 
         {
@@ -103,21 +87,21 @@ class AttendanceController extends Controller
             (
                'error', $e->getMessage()
             );
-        }  
+        } 
+        return view('approveAttendance',['users'=>$users]);     
      }
 
      public function approveAttendance(Request $request,$email)
      {
+        $email = $request->input('email');
+        $password = $request->input('psw');
+        $team = $request->input('team');
+        $designation = $request->input('designation');
+        $attendance = $request->input('attendance');
+        $approved = $request->input('approved');
         try
         {
-            $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
-            $designation = $request->input('designation');
-            $attendance = $request->input('attendance');
-            $approved = $request->input('approved');
             EmployeeDetails::updateAttendance($email,$attendance,$approved);
-            echo "Attendance updated successfully.";
         }
         catch (\Exception $e) 
         {
@@ -126,5 +110,6 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
+        return "Attendance updated successfully!";
      }
 }
