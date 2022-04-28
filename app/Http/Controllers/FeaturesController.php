@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Info;
-use App\EmployeeDetails;
+use App\EmployeeDetails; 
 use Illuminate\Support\Facades\DB;
 
 use Session;
