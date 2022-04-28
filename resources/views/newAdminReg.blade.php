@@ -1,4 +1,4 @@
-<!--REGISTRATION PAGE -->
+<!--REGISTRATION PAGE --> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
