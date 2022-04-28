@@ -9,6 +9,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
+    @if (session('status'))
+     <div class="alert alert-success" role="alert">
+      <p> Attendance Updated Successfully </p>
+     </div>
+    @endif
     <h2 style="background-color:#aee5a0;"><u>Attendance Requests</u></h2>
     <input style="background-color:#e5eed8;" class="form-control" id="myInput" type="text" placeholder="Search..">
     <br>
