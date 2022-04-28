@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
  </head>
  <body>
+   @if (session('status'))
+    <div class="alert alert-success" role="alert">
+     <p> Updated Successfully </p>
+    </div>
+   @endif
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +30,7 @@
           <a class="nav-link" href="/show">Delete User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/showEmployees">View Users</a> 
+          <a class="nav-link" href="/showEmployees">View Users</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/show">Edit </a>
