@@ -62,8 +62,8 @@ Route::group(['middleware'=>'session'],function(){
     Route::post('/userPortal','FeaturesController@addUser');
 
     //Edit Employee's details
-    Route::get('edit/{email}','EmployeeController@showEmployeeDetail');
-    Route::post('edit/{email}','EmployeeController@editDetails');
+    Route::patch('edit/{email}','EmployeeController@showEmployeeDetail');
+    Route::post('editdetails/{email}','EmployeeController@editDetails');
 
 });
 
