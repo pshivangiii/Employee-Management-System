@@ -42,9 +42,8 @@ class EmployeeDetails extends Model
      /**
      * @param String $email
      * @param String $password
-     * @param $request
      */
-    public static function login($email,$password,$request)
+    public static function login($email,$password)
     {
         if((empty($email)) || (empty($password)))  
         {
@@ -54,7 +53,6 @@ class EmployeeDetails extends Model
          if(count($check)>0)
                 {
                     $users=$check;
-                    $request->session()->put('email',$email);
                     $users=compact('users');
                     return $users;
                 }      
@@ -71,7 +69,6 @@ class EmployeeDetails extends Model
         }
         $check=Self::where(['email'=>$email])->get();
         if(count($check)>0)
-       
                {
                    $users=$check;
                    $users=compact('users');
@@ -120,7 +117,11 @@ class EmployeeDetails extends Model
         $users=Self::all();
         return $users;
     }
-        
+
+     /**
+     * @param String $email
+     * @param String $attendance
+     */    
     public static function markAttendance($email,$attendance)
     {
         if((empty($email)) || (empty($attendance)))
