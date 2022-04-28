@@ -13,7 +13,7 @@
        {{ csrf_field() }}
         <div class="container">
           <label for="email"><b>Email</b></label>
-          <input type="text"  placeholder="Enter Email" name="email" id="email" >
+          <input type="text"  placeholder="Enter Email" name="email" id="email" required >
          <div>
          @php
           foreach ($errors->get('email') as $message) {
@@ -40,29 +40,23 @@
            <option value="IC3">IC-3</option>
            </select>
           <br><br>
-         <div>
-         @php
-          foreach ($errors->get('psw') as $message) {
-            echo $message;
-           }
-           @endphp
-          </div>
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
           <div>
-           
            @php
             foreach ($errors->get('password') as $message) {
               echo $message;
              }
-             @endphp 
-            </div>
+            @endphp 
+          </div>
             <br>
-          <label for="psw-repeat"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Enter Password" id="psw-repeat" name="psw-repeat" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+          <label for="password-repeat"><b>Repeat Password</b></label>
+          <input type="password" placeholder="Enter Password" id="password-repeat" name="password-repeat" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+    
           <div>
            @php
-            foreach ($errors->get('psw-repeat') as $message) {
+            foreach ($errors->get('password-repeat') as $message) {
               echo $message;
              }
              @endphp
