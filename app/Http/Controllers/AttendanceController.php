@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
+    public function getAttendance()
+    {
+       return view('attendancePortal');
+    }
     public function showAttendancePortal($email)
      { 
         try 
@@ -56,7 +60,7 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "Attendance marked successfully!";
+        return redirect('/login')->with('status', 'attendance marked successfully');
      }
 
     public function showAttendanceRequests()
@@ -110,6 +114,6 @@ class AttendanceController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "Attendance updated successfully!";
+        return redirect('/showAttendanceRequests')->with('status', 'attendance updated successfully');
      }
 }
