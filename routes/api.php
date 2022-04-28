@@ -14,17 +14,11 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+ Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+ });
 
 
-
-//List of all the users with manual paginator
-Route::get('/showUsers','SearchController@showUsers');
-Route::get('/nextUsers/{id}','SearchController@nextUsers');
-Route::get('/prevUsers/{id}','SearchController@prevUsers');
-
-//Manual Filter to filter out on the basis of team, designation, id and email
+//Manual Filter with pagination to filter out on the basis of team, designation, id and email
 Route::get('/search','SearchController@showfilter');
 Route::post('/search','SearchController@showFilteredResult');
