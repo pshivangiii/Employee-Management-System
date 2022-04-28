@@ -23,7 +23,7 @@ class FeaturesController extends Controller
     {
         $request->validate();
         $email=$request->input('email');
-        $password=$request->input('psw');
+        $password=$request->input('password');
         $team=$request->input('team');
         $designation=$request->input('designation');
         try
@@ -37,13 +37,14 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "NEW EMPLOYEE ADDED";
+        return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
     public function showEmployees()
     {
         try
         {
-            $data=EmployeeDetails::paginatedData();
+            // $data=EmployeeDetails::AllData();
+            $users=EmployeeDetails::allData();
         }
         catch (\Exception $e) 
         {
@@ -52,7 +53,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-        return view('userDetails',['data'=> $data]);
+        return view('userDetails',['users'=> $users]);
     }
     public function deleteEmployee($id)
     {
@@ -67,7 +68,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "DELETED SUCCESSFULLY";
+        return redirect('/show')->with('status', 'Deleted Successfully');
     }
     public function showAllEmployees()
     {
@@ -137,7 +138,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "Profile updated successfully.";
+        return redirect('/login')->with('status', 'Updated Successfully');
     }
 }
 
