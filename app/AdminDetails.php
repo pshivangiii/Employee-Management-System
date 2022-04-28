@@ -34,7 +34,7 @@ class AdminDetails extends Model
      * @param String $password
      * @param $request
     */
-    public static function authenticateLogin($email,$password,$request)
+    public static function authenticateLogin($email,$password)
     {
      if((!empty($email)) && (!empty($password)))  
      {
@@ -42,10 +42,28 @@ class AdminDetails extends Model
         if(count($check)>0)
         {
             $users=AdminDetails::where(['email'=>$email,'password'=>$password])->get();
-            $request->session()->put('email',$email);
             $users=compact('users');
             return $users;
         }
      }
     }    
+
+    /**
+     * @param String $email
+     * @param $request
+    */
+    public static function enableLogin($email)
+    {
+        if(empty($email))
+        {
+            return "EMAIL NEEDED!";
+        }
+         $check=AdminDetails::where(['email'=>$email])->get();
+         if(count($check)>0)
+         {
+            $users=AdminDetails::where(['email'=>$email])->get();
+            $users=compact('users');
+            return $users;
+         }
+    }
 }
