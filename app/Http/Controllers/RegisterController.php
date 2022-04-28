@@ -18,7 +18,7 @@ class RegisterController extends Controller
     {
         $request->validate();
         $email=$request->input('email');
-        $password=$request->input('psw'); 
+        $password=$request->input('password'); 
         $team=$request->input('team');
         $designation=$request->input('designation'); 
         try
@@ -42,7 +42,7 @@ class RegisterController extends Controller
     {
         $request->validate();
         $email=$request->input('email');
-        $password=$request->input('psw');
+        $password=$request->input('password');
         try
         {
             AdminDetails::adminregistrationModel($email,$password);
