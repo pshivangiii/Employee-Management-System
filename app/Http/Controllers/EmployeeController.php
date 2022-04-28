@@ -60,7 +60,7 @@ class EmployeeController extends Controller
                'error', $e->getMessage()
             );
         }
-        return "Record updated successfully."; 
+        return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
 
     //VIEW TEAM'S DATA IF YOU'RE A MANAGER
