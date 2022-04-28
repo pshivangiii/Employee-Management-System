@@ -29,7 +29,6 @@ class FeaturesController extends Controller
         try
         {
             EmployeeDetails::registrationModel($email,$password,$team,$designation); 
-            return "NEW EMPLOYEE ADDED";
         }
         catch (\Exception $e) 
         {
@@ -38,12 +37,13 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return "NEW EMPLOYEE ADDED";
     }
     public function showEmployees()
     {
         try
         {
-            $data=EmployeeDetails::AllData();
+            $data=EmployeeDetails::paginatedData();
         }
         catch (\Exception $e) 
         {
@@ -59,7 +59,6 @@ class FeaturesController extends Controller
         try
         {
             EmployeeDetails::deleteData($id);
-            return "DELETED SUCCESSFULLY";
         }
         catch (\Exception $e) 
         {
@@ -68,7 +67,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-    
+        return "DELETED SUCCESSFULLY";
     }
     public function showAllEmployees()
     {
@@ -130,7 +129,6 @@ class FeaturesController extends Controller
         try
         {
             EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
-            echo "Profile updated successfully.";
         }
         catch (\Exception $e) 
         {
@@ -139,6 +137,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return "Profile updated successfully.";
     }
 }
 
