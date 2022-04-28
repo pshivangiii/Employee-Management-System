@@ -4,7 +4,7 @@
     <title>Employee Details | Edit</title>
     </head>
     <body>
-      <form action = "/edit/{{users->email}}" method = "post">
+      <form action = "/editdetails/{{users->email}}" method = "post">
         <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
         <table>
             <tr style="background-color:#99d388;">
