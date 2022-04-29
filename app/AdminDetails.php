@@ -24,10 +24,10 @@ class AdminDetails extends Model
         {
             return null;
         }
-            $reg=new AdminDetails();
-            $reg->email=$email;
-            $reg->password=$password;
-            $reg->save();
+        $reg=new AdminDetails();
+        $reg->email=$email;
+        $reg->password=$password;
+        $reg->save();
     }
     
     /**
