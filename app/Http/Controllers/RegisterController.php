@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $designation=$request->input('designation'); 
         try
         {
-            EmployeeDetails::registrationModel($email,$password,$team,$designation);
+            EmployeeDetails::getRegistration($email,$password,$team,$designation);
         }
         catch (\Exception $e) 
         {
@@ -48,7 +48,7 @@ class RegisterController extends Controller
         $password=$request->input('password');
         try
         {
-            AdminDetails::adminregistrationModel($email,$password);
+            AdminDetails::getAdminRegistration($email,$password);
         }
         catch (\Exception $e) 
         {
@@ -59,7 +59,7 @@ class RegisterController extends Controller
         }
         return view('newAdminLogin');
     }
-    
+
     public function showDashboard()
     {
         return view('dashboard');
