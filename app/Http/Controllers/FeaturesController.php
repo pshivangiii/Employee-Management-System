@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Info;
-use App\EmployeeDetails; 
-use Illuminate\Support\Facades\DB;
-
+use App\EmployeeDetails;
+use App\Http\Requests\ValidateRequest;
 use Session;
 
 use Illuminate\Validation\Rule;
@@ -19,7 +18,7 @@ class FeaturesController extends Controller
     {
         return view('addUser');
     }
-    
+
     public function addUser(RegisterRequest $request)
     {
         $request->validate();
@@ -29,7 +28,7 @@ class FeaturesController extends Controller
         $designation=$request->input('designation');
         try
         {
-            EmployeeDetails::registrationModel($email,$password,$team,$designation); 
+            EmployeeDetails::getRegistration($email, $password, $team, $designation); 
         }
         catch (\Exception $e) 
         {
@@ -40,12 +39,12 @@ class FeaturesController extends Controller
         }
         return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
-    
+
     public function showEmployees()
     {
         try
         {
-            $users=EmployeeDetails::paginatedData();
+            $users=EmployeeDetails::getPaginatedData();
         }
         catch (\Exception $e) 
         {
@@ -56,9 +55,13 @@ class FeaturesController extends Controller
         }
         return view('userDetails',['users'=> $users]);
     }
-    
+
     public function deleteEmployee($id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
             EmployeeDetails::deleteData($id);
@@ -72,12 +75,12 @@ class FeaturesController extends Controller
         }
         return redirect('/show')->with('status', 'Deleted Successfully');
     }
-    
+
     public function showAllEmployees()
     {
         try
         {
-            $users=EmployeeDetails::paginatedData();
+            $users=EmployeeDetails::getPaginatedData();
         }
         catch (\Exception $e) 
         {
@@ -96,6 +99,10 @@ class FeaturesController extends Controller
 
     public function viewProfile($email)
     {
+        if(empty($email))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
             $users=EmployeeDetails::getEmployeeDetails($email);
@@ -109,9 +116,13 @@ class FeaturesController extends Controller
         }
         return view('viewOwnProfile',['users'=>$users]); 
     }
-    
+
     public function showDetails($email)
     {
+        if(empty($email))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
             $users=EmployeeDetails::getEmployeeData($email);
@@ -125,16 +136,21 @@ class FeaturesController extends Controller
         }
         return view('updateOwnProfile',['users'=>$users]);
     }
-    
-    public function editOwnProfile(Request $request,$id)
+
+    public function editOwnProfile(ValidateRequest $request,$id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
+        $request->validate();
         $email = $request->input('email');
         $password = $request->input('psw');
         $team = $request->input('team');
         $designation = $request->input('designation');
         try
         {
-            EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
+            EmployeeDetails::updateProfile($id, $email, $password, $team, $designation);
         }
         catch (\Exception $e) 
         {
