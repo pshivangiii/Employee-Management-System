@@ -14,6 +14,7 @@ class RegisterController extends Controller
     {
         return view('newreg');
     }
+
     public function registerAuthenticate(RegisterRequest $request)
     {
         $request->validate();
@@ -34,10 +35,12 @@ class RegisterController extends Controller
         }
         return view('newlogin');
     } 
+
     public function viewRegistrationPage()
     {
         return view('newAdminReg');
     }
+
     public function authenticateRegistration(RegisterRequest $request)
     {
         $request->validate();
@@ -56,6 +59,7 @@ class RegisterController extends Controller
         }
         return view('newAdminLogin');
     }
+    
     public function showDashboard()
     {
         return view('dashboard');
