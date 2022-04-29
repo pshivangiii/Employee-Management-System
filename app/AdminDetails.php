@@ -18,21 +18,21 @@ class AdminDetails extends Model
      * @param String $email
      * @param String $password
     */
-    public static function adminRegistrationModel($email,$password)
+    public static function getAdminRegistration($email,$password)
     {
-        if((!empty($email)) && (!empty($password)))  
+        if((empty($email)) && (empty($password)))  
         {
+            return null;
+        }
             $reg=new AdminDetails();
             $reg->email=$email;
             $reg->password=$password;
             $reg->save();
-        }
     }
     
     /**
      * @param String $email
      * @param String $password
-     * @param $request
     */
     public static function authenticateLogin($email,$password)
     {
@@ -41,7 +41,7 @@ class AdminDetails extends Model
         $check=AdminDetails::where(['email'=>$email,'password'=>$password])->get();
         if(count($check)>0)
         {
-            $users=AdminDetails::where(['email'=>$email,'password'=>$password])->get();
+            $users=$check;
             $users=compact('users');
             return $users;
         }
@@ -50,18 +50,17 @@ class AdminDetails extends Model
 
     /**
      * @param String $email
-     * @param $request
     */
     public static function enableLogin($email)
     {
         if(empty($email))
         {
-            return "EMAIL NEEDED!";
+            return null;
         }
          $check=AdminDetails::where(['email'=>$email])->get();
          if(count($check)>0)
          {
-            $users=AdminDetails::where(['email'=>$email])->get();
+            $users=$check;
             $users=compact('users');
             return $users;
          }
