@@ -112,12 +112,6 @@ class EmployeeDetails extends Model
         return $users;
     }
 
-    public static function allData()
-    {
-        $users=Self::all();
-        return $users;
-    }
-
      /**
      * @param String $email
      * @param String $attendance
