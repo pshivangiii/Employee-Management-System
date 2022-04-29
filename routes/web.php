@@ -37,7 +37,7 @@ Route::group(['middleware'=>'session'],function(){
     Route::delete('/show/{id}','FeaturesController@deleteEmployee');
     
     //Show team details to manager
-    Route::get('/team_details/{team}','EmployeeController@myTeam');
+    Route::get('/team_details/{team}','EmployeeController@showTeamMembers');
 
     //Apply Attendance
     Route::get('/attendancePortal/{email}','AttendanceController@showAttendancePortal');
