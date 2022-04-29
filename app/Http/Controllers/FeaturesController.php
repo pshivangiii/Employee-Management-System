@@ -19,6 +19,7 @@ class FeaturesController extends Controller
     {
         return view('addUser');
     }
+    
     public function addUser(RegisterRequest $request)
     {
         $request->validate();
@@ -39,6 +40,7 @@ class FeaturesController extends Controller
         }
         return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
+    
     public function showEmployees()
     {
         try
@@ -54,6 +56,7 @@ class FeaturesController extends Controller
         }
         return view('userDetails',['users'=> $users]);
     }
+    
     public function deleteEmployee($id)
     {
         try
@@ -69,6 +72,7 @@ class FeaturesController extends Controller
         }
         return redirect('/show')->with('status', 'Deleted Successfully');
     }
+    
     public function showAllEmployees()
     {
         try
@@ -105,6 +109,7 @@ class FeaturesController extends Controller
         }
         return view('viewOwnProfile',['users'=>$users]); 
     }
+    
     public function showDetails($email)
     {
         try
@@ -120,6 +125,7 @@ class FeaturesController extends Controller
         }
         return view('updateOwnProfile',['users'=>$users]);
     }
+    
     public function editOwnProfile(Request $request,$id)
     {
         $email = $request->input('email');
