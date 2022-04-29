@@ -5,12 +5,11 @@ use Illuminate\Http\Request;
 use App\Info;
 use App\EmployeeDetails;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ValidateRequest;
 
 
 class EmployeeController extends Controller
 {
-
-//EDIT EMPLOYEE DETAILS
     public function showEmployeeDetail(Request $request,$email) 
     {
         try
@@ -27,8 +26,13 @@ class EmployeeController extends Controller
         return view('update',['users'=>$users]);   
     }
 
-    public function editDetails(Request $request,$id)
+    public function editDetails(ValidateRequest $request,$id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
+        $request->validate();
         $email = $request->input('email');
         $password = $request->input('psw');
         $team = $request->input('team');
@@ -48,11 +52,11 @@ class EmployeeController extends Controller
     }
 
     //VIEW TEAM'S DATA IF YOU'RE A MANAGER
-    public function myTeam($team)
+    public function showTeamMembers($team)
     {
         try
         {
-            $users=EmployeeDetails::viewTeam($team);
+            $users=EmployeeDetails::showTeamMembers($team);
         }
         catch (\Exception $e) 
         {
