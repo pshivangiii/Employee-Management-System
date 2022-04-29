@@ -11,22 +11,6 @@ class EmployeeController extends Controller
 {
 
 //EDIT EMPLOYEE DETAILS
-    public function viewEmployees()
-    {
-        try
-        {
-            $users=EmployeeDetails::allData();
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-        return view('updateEmp',['users'=>$users]);
-    }
-
     public function showEmployeeDetail(Request $request,$email) 
     {
         try
