@@ -53,3 +53,147 @@ Don't create multiple functions with same usage
 Different method for GET and POST
 changes in set data function, use key-value pairs along with null validation
 Study Form Request
+
+
+
+// TODO:
+// 1. Fix Code issues
+// 2. Create a CRON or Scheduler ->
+// 3. Create an API ->
+// -> List of all Products
+// -> At a time only 20 with pagination (No laravel inbuild pagination)
+// -> Filters Ecommerse : Name, Order_id, Product_id
+// -> Filters Course: Name, Teacher, Assigned or not, Student_id
+// -> Filters: Library: Book_name, Book_id, From Date and To Date,
+// -> Filters: Joining Date, Name, Id, Salary Range
+
+
+
+
+
+Web Routes should be grouped together based on usage.
+No function closures in web routes.
+Naming convention for web routes.
+Class Data Members should be at the top.
+Returns should be from every function.
+Proper validation of function data.
+Use Auth instead of Session.
+
+
+
+
+
+       //PAGINATION ON LIST OF USERS
+     /**
+     * @param String $id
+     */
+    public static function showUsers($id)
+    {
+        if(empty($id))
+        {
+            throw new Exception("No users Found!");
+        }
+            $data=EmployeeDetails::limit($id)->get();
+            return $data;
+    }
+     /**
+     * @param String $id
+     */
+    public static function nextUsers($id)
+    {
+        if(empty($id))
+        {
+            throw new Exception("No users found!");
+        }
+        $data=EmployeeDetails::whereBetween('id', [$id,$id+5])->get();
+        return $data;
+    }
+     /** 
+     * @param String $id
+     */
+    public static function prevUsers($id)
+    {
+        if(empty($id))
+        {
+            throw new Exception("No users found!");
+        }
+        $data=EmployeeDetails::whereBetween('id', [$id-5,$id])->get();
+        return $data;
+    }
+    //  /**
+    //  * @param String $email
+    //  * @param String $password
+    //  */
+    // public static function loginUser($email,$password,$request)
+    // {
+    //     $check=EmployeeDetails::where(['email'=>$email])->get();
+    //     if(count($check)>0)
+    //        {
+    //             $users=EmployeeDetails::where(['email'=>$email])->get();
+    //             $users=compact('users');
+    //             return $users;
+    //         }
+    // }
+
+
+
+ // public static function allData()
+    // {
+    //     $users=Self::all();
+    //     return $users;
+    // }
+
+EMPLOYEECONTROLLER
+        public function viewEmployees()
+    {
+        try
+        {
+            $users=EmployeeDetails::allData();
+        }
+        catch (\Exception $e) 
+        {
+            return redirect('error')->with
+            (
+               'error', $e->getMessage()
+            );
+        }
+        return view('updateEmp',['users'=>$users]);
+
+        //EDIT EMPLOYEE DETAILS
+    // public function viewEmployees()
+    // {
+    //     try
+    //     {
+    //         $users=EmployeeDetails::allData();
+    //     }
+    //     catch (\Exception $e) 
+    //     {
+    //         return redirect('error')->with
+    //         (
+    //            'error', $e->getMessage()
+    //         );
+    //     }
+    //     return view('updateEmp',['users'=>$users]);
+    // }
+    }
+
+
+    EmployeeDetails
+
+    
+     /**
+     * @param String $email
+     * @param String $password
+     */
+    public static function find($email,$password)
+    {
+        if((empty($email)) || (empty($password)))
+        {
+             return null;
+        }
+          $users=Self::where(['email'=>$email,'password'=>$password])->get();
+          if(!empty($users))
+            {
+              return $email;
+            }   
+    }

@@ -21,16 +21,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/adminRegistration">ADMIN SIGN UP</a>
+        <a class="nav-link" href="/r">SIGN UP</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/registration">EMPLOYEE SIGN UP</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/adminLogin">ADMIN SIGN IN</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">EMPLOYEE SIGN IN</a>
+        <a class="nav-link" href="/newlogin">SIGN IN</a>
       </li>
     </ul>
   </div>

@@ -4,7 +4,7 @@
     <title>Employee Details | Edit</title>
     </head>
     <body>
-        <form action = "/final/<?php echo $users[0]->id; ?>" method = "post">
+        <form action = "/markAttendance/<?php echo $users[0]->id; ?>" method = "post">
         <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
          <table>
             <tr style="background-color:#99d388;">

@@ -5,20 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Info;
 use App\EmployeeDetails;
-use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\ValidateRequest;
 use Session;
 
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 
 class FeaturesController extends Controller
 { 
-    public function addUser(Request $request)
+    public function viewAddUserPage()
     {
+        return view('addUser');
+    }
+
+    public function addUser(RegisterRequest $request)
+    {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('password');
+        $team=$request->input('team');
+        $designation=$request->input('designation');
         try
         {
-            return view('addUser');
+            EmployeeDetails::getRegistration($email, $password, $team, $designation); 
         }
         catch (\Exception $e) 
         {
@@ -27,43 +37,14 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
-    public function addUserPost(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email'
-            // 'email' => 'required|unique:posts|max:255',
-            // 'psw' => 'required_with:password_confirmation|same:psw-repeat',
-            // 'psw' => 'required|psw',
-            // 'psw-repeat' => 'required|psw_repeat'
-            ]);
-      
-        // print_r($request->input('email'));
-        // $name = $request->input('email');
-        // return $request->all();
-        try
-        {
-            $email=$request->input('email');
-            $password=$request->input('psw');
-            $team=$request->input('team');
-            $designation=$request->input('designation');
-            EmployeeDetails::registrationModel($email,$password,$team,$designation); 
-            return "NEW EMPLOYEE ADDED";
-        }
-    catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
+
     public function showEmployees()
     {
         try
         {
-            $data=EmployeeDetails::AllData();
-            return view('userDetails',['data'=> $data]);
+            $users=EmployeeDetails::getPaginatedData();
         }
         catch (\Exception $e) 
         {
@@ -72,13 +53,18 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('userDetails',['users'=> $users]);
     }
-    public function deleteEmployee(Request $request,$id)
+
+    public function deleteEmployee($id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
             EmployeeDetails::deleteData($id);
-            return "DELETED SUCCESSFULLY";
         }
         catch (\Exception $e) 
         {
@@ -87,14 +73,14 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-    
+        return redirect('/show')->with('status', 'Deleted Successfully');
     }
-    public function showAllEmployees(Request $request)
+
+    public function showAllEmployees()
     {
         try
         {
-            $users=EmployeeDetails::AllDatap();
-            return view('paginateView',['users'=> $users]);
+            $users=EmployeeDetails::getPaginatedData();
         }
         catch (\Exception $e) 
         {
@@ -103,29 +89,23 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('paginateView',['users'=> $users]);
     }
 
     public function getPayroll()
     {
-        try
-        {
-            return view('payroll');
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
+        return view('payroll');
     }
 
-    public function viewProfile(Request $request,$email)
+    public function viewProfile($email)
     {
+        if(empty($email))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
-            $users=EmployeeDetails::specificData($email);
-            return view('viewOwnProfile',['users'=>$users]); 
+            $users=EmployeeDetails::getEmployeeDetails($email);
         }
         catch (\Exception $e) 
         {
@@ -134,13 +114,18 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('viewOwnProfile',['users'=>$users]); 
     }
-    public function showDetails(Request $request,$email)
+
+    public function showDetails($email)
     {
+        if(empty($email))
+        {
+            return redirect('/dashboard');
+        }
         try
         {
             $users=EmployeeDetails::getEmployeeData($email);
-            return view('updateOwnProfile',['users'=>$users]);
         }
         catch (\Exception $e) 
         {
@@ -149,17 +134,23 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('updateOwnProfile',['users'=>$users]);
     }
-    public function editOwnProfile(Request $request,$id)
+
+    public function editOwnProfile(ValidateRequest $request,$id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
+        $request->validate();
+        $email = $request->input('email');
+        $password = $request->input('psw');
+        $team = $request->input('team');
+        $designation = $request->input('designation');
         try
         {
-            $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
-            $designation = $request->input('designation');
-            EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
-            echo "Profile updated successfully.";
+            EmployeeDetails::updateProfile($id, $email, $password, $team, $designation);
         }
         catch (\Exception $e) 
         {
@@ -168,6 +159,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
+        return redirect('/login')->with('status', 'Updated Successfully');
     }
 }
 

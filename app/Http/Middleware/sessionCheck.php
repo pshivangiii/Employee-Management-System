@@ -17,12 +17,10 @@ class sessionCheck
     public function handle($request, Closure $next)
     {
          $value = $request->session()->get('email');
-         
-         if(empty($value)){
-            
+         if(empty($value))
+         {
             return response()->view('dashboard');
-         }
-       
+         } 
         return $next($request);
     }
 }

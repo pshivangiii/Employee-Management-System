@@ -9,11 +9,11 @@
   </head>
   <body style="text-align:center;">  
     <h1> REGISTRATION FORM </h1>
-    <form class ="row g-3" action="{{url('/')}}/registration" method="POST">
+    <form class ="row g-3" action="{{url('/')}}/r" method="POST">
        {{ csrf_field() }}
         <div class="container">
           <label for="email"><b>Email</b></label>
-          <input type="text"  placeholder="Enter Email" name="email" id="email" required >
+          <input type="text"  placeholder="Enter Email" name="email" id="email" >
          <div>
          @php
           foreach ($errors->get('email') as $message) {
@@ -38,25 +38,33 @@
            <option value="IC1">IC-1</option>
            <option value="IC2">IC-2</option>
            <option value="IC3">IC-3</option>
+           <option value="Admin">Admin</option>
            </select>
           <br><br>
-          <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-
+         <div>
+         @php
+          foreach ($errors->get('psw') as $message) {
+            echo $message;
+           }
+           @endphp
+          </div>
+          <label for="psw"><b>Password</b></label>
+          {{-- <input type="password" placeholder="Enter Password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required> --}}
+          <input type="password" placeholder="Enter Password" name="psw" id="psw" >
           <div>
+           
            @php
             foreach ($errors->get('password') as $message) {
               echo $message;
              }
-            @endphp 
-          </div>
+             @endphp 
+            </div>
             <br>
-          <label for="password-repeat"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Enter Password" id="password-repeat" name="password-repeat" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-    
+          <label for="psw-repeat"><b>Repeat Password</b></label>
+          <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" >
           <div>
            @php
-            foreach ($errors->get('password-repeat') as $message) {
+            foreach ($errors->get('psw-repeat') as $message) {
               echo $message;
              }
              @endphp

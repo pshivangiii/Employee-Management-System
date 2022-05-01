@@ -14,23 +14,17 @@ class RegisterController extends Controller
     {
         return view('newreg');
     }
+
     public function registerAuthenticate(RegisterRequest $request)
     {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('password'); 
+        $team=$request->input('team');
+        $designation=$request->input('designation'); 
         try
         {
-            $request->validate();
- 
-            $email=$request->input('email');
-
-            $password=$request->input('psw');
-    
-            $team=$request->input('team');
-    
-            $designation=$request->input('designation');
-
-            EmployeeDetails::registrationModel($email,$password,$team,$designation);
-
-            return view('newlogin');
+            EmployeeDetails::getRegistration($email,$password,$team,$designation);
         }
         catch (\Exception $e) 
         {
@@ -39,21 +33,22 @@ class RegisterController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('newlogin');
     } 
+
     public function viewRegistrationPage()
     {
         return view('newAdminReg');
     }
+
     public function authenticateRegistration(RegisterRequest $request)
     {
+        $request->validate();
+        $email=$request->input('email');
+        $password=$request->input('password');
         try
         {
-            $request->validate();
-            $email=$request->input('email');
-
-            $password=$request->input('psw');
-            AdminDetails::adminregistrationModel($email,$password);
-            return view('newAdminLogin');
+            AdminDetails::getAdminRegistration($email,$password);
         }
         catch (\Exception $e) 
         {
@@ -62,7 +57,9 @@ class RegisterController extends Controller
                'error', $e->getMessage()
             );
         }
+        return view('newAdminLogin');
     }
+
     public function showDashboard()
     {
         return view('dashboard');

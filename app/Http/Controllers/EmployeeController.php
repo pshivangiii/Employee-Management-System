@@ -5,34 +5,16 @@ use Illuminate\Http\Request;
 use App\Info;
 use App\EmployeeDetails;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ValidateRequest;
 
 
 class EmployeeController extends Controller
 {
-
-//EDIT EMPLOYEE DETAILS
-    public function viewEmployees()
-    {
-        try
-        {
-            $users=EmployeeDetails::allData();
-            return view('updateEmp',['users'=>$users]);
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
-
     public function showEmployeeDetail(Request $request,$email) 
     {
         try
         {
-            $users=EmployeeDetails::specificData($email);
-            return view('update',['users'=>$users]);
+            $users=EmployeeDetails::getEmployeeData($email);
         }
         catch (\Exception $e) 
         {
@@ -40,19 +22,24 @@ class EmployeeController extends Controller
             (
                'error', $e->getMessage()
             );
-        }    
+        } 
+        return view('update',['users'=>$users]);   
     }
 
-    public function editDetails(Request $request,$id)
+    public function editDetails(ValidateRequest $request,$id)
     {
+        if(empty($id))
+        {
+            return redirect('/dashboard');
+        }
+        $request->validate();
+        $email = $request->input('email');
+        $password = $request->input('psw');
+        $team = $request->input('team');
+        $designation = $request->input('designation');
         try
         {
-            $email = $request->input('email');
-            $password = $request->input('psw');
-            $team = $request->input('team');
-            $designation = $request->input('designation');
             EmployeeDetails::updateProfile($id,$email,$password,$team,$designation);
-            echo "Record updated successfully.";
         }
         catch (\Exception $e) 
         {
@@ -61,15 +48,15 @@ class EmployeeController extends Controller
                'error', $e->getMessage()
             );
         }
+        return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
 
     //VIEW TEAM'S DATA IF YOU'RE A MANAGER
-    public function myTeam(Request $request,$team)
+    public function showTeamMembers($team)
     {
         try
         {
-            $users=EmployeeDetails::viewTeam($team);
-            return view('myteam',['users'=>$users]); 
+            $users=EmployeeDetails::showTeamMembers($team);
         }
         catch (\Exception $e) 
         {
@@ -77,7 +64,8 @@ class EmployeeController extends Controller
             (
                'error', $e->getMessage()
             );
-        }    
+        }  
+        return view('myteam',['users'=>$users]);    
     }
 }
 

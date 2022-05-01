@@ -24,6 +24,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->team}}</td>
                     <td>{{ $user->designation}}</td>
+                </tr>    
                 @endforeach
         </table>
     <p>{{ $users->links() }}</p>

@@ -4,7 +4,8 @@
     <title>Employee Details | Edit</title>
     </head>
     <body>
-      <form action = "/edit/{{users->email}}" method = "post">
+      <form action = "/editdetails/{{users->email}}" method="POST">
+
         <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
         <table>
             <tr style="background-color:#99d388;">
@@ -39,7 +40,7 @@
                 <td colspan = '2'>
                 <input type = 'submit' value = "Update Details" />
                 </td>
-                </tr>
+            </tr>
         </table>
       </form>
     </body>

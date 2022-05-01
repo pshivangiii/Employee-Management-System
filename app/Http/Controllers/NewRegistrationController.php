@@ -62,4 +62,29 @@ class NewRegistrationController extends Controller
             );
         }
     }
+    public function showRegistrationPage()
+    {
+        return view('registrationPage');
+    }
+    public function registerUser(Request $request)
+    {
+ 
+            $email=$request->input('email');
+
+            $password=$request->input('psw');
+    
+            $team=$request->input('team');
+    
+            $designation=$request->input('designation');
+
+            EmployeeDetails::getRegistration($email,$password,$team,$designation);
+            
+            // if($designation != 'Admin')
+            // {
+            // return view('newlogin');
+            // }
+            
+            return redirect('/newlogin');
+        
+    } 
 }

@@ -4,10 +4,11 @@ use Illuminate\support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 use  App\Http\Controllers\RegController;
-use App\Http\Middleware\CheckPage;
+
+// use App\Jobs\SendWelcomeEmailJob;
 
 use App\Info;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,50 +37,54 @@ Route::group(['middleware'=>'session'],function(){
     Route::delete('/show/{id}','FeaturesController@deleteEmployee');
     
     //Show team details to manager
-    Route::get('/team_details/{team}','EmployeeController@myTeam');
+    Route::get('/team_details/{team}','EmployeeController@showTeamMembers');
 
     //Apply Attendance
     Route::get('/attendancePortal/{email}','AttendanceController@showAttendancePortal');
-    Route::get('final/{id}','AttendanceController@markAttendance');
-    Route::post('final/{id}','AttendanceController@submitAttendance');
+    // Route::get('final/{id}','AttendanceController@markAttendance');
+    // Route::post('final/{id}','AttendanceController@submitAttendance');
+    Route::get('markAttendance/{id}','AttendanceController@markAttendance');
+    Route::post('markAttendance/{id}','AttendanceController@submitAttendance');
 
     //Approve Attendance
-    Route::get('/approval','AttendanceController@showAttendanceRequests');
+    // Route::get('/approval','AttendanceController@showAttendanceRequests');
+    Route::get('/showAttendanceRequests','AttendanceController@showAttendanceRequests');
     Route::get('/approve_attendance/{email}','AttendanceController@showRequestDetail');
     Route::post('/approve_attendance/{email}','AttendanceController@approveAttendance');
 
     //Show list of employees 
-    Route::get('/allEmployees','FeaturesController@showAllEmployees');
+    Route::get('/showEmployees','FeaturesController@showAllEmployees');
 
     //Show and edit details
     Route::get('/ownprofile/{email}','FeaturesController@viewProfile');
     Route::get('/ownprofile/own/{email}','FeaturesController@showDetails');
     Route::post('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
-
+ 
     //To add a new user
-    Route::get('/adduser','FeaturesController@addUser');
-    Route::post('/adduser','FeaturesController@addUserPost');
+    Route::get('/userPortal','FeaturesController@viewAddUserPage');
+    Route::post('/userPortal','FeaturesController@addUser');
 
     //Edit Employee's details
-    Route::get('edit/{email}','EmployeeController@showEmployeeDetail');
-    Route::post('edit/{email}','EmployeeController@editDetails');
+    Route::patch('edit/{email}','EmployeeController@showEmployeeDetail');
+    Route::post('editdetails/{email}','EmployeeController@editDetails'); 
 
 });
 
-Route::get('/newreg','RegisterController@showRegPage');
-Route::post('/newreg','RegisterController@registerAuthenticate');
+
+Route::get('/registration','RegisterController@showRegPage');
+Route::post('/registration','RegisterController@registerAuthenticate');
 
 
-Route::get('/newlogin','LoginController@showLoginPage');
-Route::post('/newlogin','LoginController@authenticateLogin');
+Route::get('/login','LoginController@showLoginPage');
+Route::post('/login','LoginController@authenticateLogin');
 
 
-Route::get('/newadminreg','RegisterController@viewRegistrationPage');
-Route::post('/newadminreg','RegisterController@authenticateRegistration');
+Route::get('/adminRegistration','RegisterController@viewRegistrationPage');
+Route::post('/adminRegistration','RegisterController@authenticateRegistration');
 
 
-Route::get('/newadminlogin','LoginController@showAdminLogin');
-Route::post('/newadminlogin','LoginController@authenticateAdminLogin');
+Route::get('/adminLogin','LoginController@showAdminLogin');
+Route::post('/adminLogin','LoginController@authenticateAdminLogin');
 
 
 Route::get('/logout','LoginController@showLogoutPage'); 
@@ -89,12 +94,10 @@ Route::post('/logout','LoginController@logout');
 
 
 
-Route::get('/page','LoginController@page'); 
-Route::get('/demo/{email}','NewRegistrationController@demo');
-Route::get('/search','SearchController@filterview');
-Route::post('/search','SearchController@postFilterview');
-Route::get('/paginate','FeaturesController@paginate');
- // Route::get('attendance/{email}','AttendanceController@index');
+
+
+
+// Route::get('attendance/{email}','AttendanceController@index');
     // Route::post('attendance/{id}','AttendanceController@postIndex');
     // Route::get('att','AttendanceController@getAttendance');
      // Route::get('user', function () {
@@ -108,4 +111,43 @@ Route::get('/paginate','FeaturesController@paginate');
     
     // Route::get('pv','FeaturesController@getPaginateView');
 
+
+    
+    
+    Route::get('/employeeManagement','EmployeeManagementController@showEmployees');
+    Route::post('/next/{id}','EmployeeManagementController@nextShow');
+    Route::post('/previous/{id}','EmployeeManagementController@prevShow');
+
+    //Same Registration Page for both Admin and Employee
+    Route::get('/r','NewRegistrationController@showRegistrationPage');
+    Route::post('/r','NewRegistrationController@registerUser');
+
+    //Same Login Page for both Admin and Employee
+    Route::get('/newlogin','NewLoginController@getLoginPage');
+    Route::post('/newlogin','NewLoginController@loginUser');
+
+    //Filter
+    Route::get('/search','SearchController@showFilter');
+    Route::get('/searchit','SearchController@showFilteredResult');
+
+    Route::get('/showUsers','SearchController@showUsers');
+    Route::get('/nextUsers/{id}','SearchController@nextUsers');
+    Route::get('/prevUsers/{id}','SearchController@prevUsers');
+
+    Route::get('/dash',function(){
+        return view('newDashboard');
+    });
+
+
+
+    
+
+// Route::get('test', function () {
+//     $details['name'] = 'Md Obydullah';
+//     $details['email'] = 'hi@obydul.me';
+
+//     dispatch(new SendWelcomeEmailJob($details));
+
+//     dd('sent');
+// });
 
