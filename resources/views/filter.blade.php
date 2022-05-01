@@ -9,7 +9,7 @@
     <title>Results</title>
 </head>
   <body>
-    <form class ="row g-3" action="{{url('/')}}/search" method="POST">
+    <form class ="row g-3" action="{{url('/')}}/search" method="GET">
      {{ csrf_field() }}
       <div class="container">
         <h3>Following Employee/s match your search</H3>
@@ -28,8 +28,14 @@
                 <td>{{ $data['email']}}</td>
                 <td>{{ $data['team']}}</td>
                 <td>{{ $data ['designation']}}</td>
-            </tr> 
-            @endforeach 
+            </tr>
+            @endforeach
+            <tr>
+              {{-- <td>{{$data->id}}</td> --}}
+              <td>{{ $data }}</td>
+              {{-- <td>{{ $data['team']}}</td>
+              <td>{{ $data ['designation']}}</td> --}}
+          </tr> 
         </table>
       </div>
     </form>

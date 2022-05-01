@@ -129,6 +129,7 @@ Route::post('/logout','LoginController@logout');
     //Filter
     Route::get('/search','SearchController@showFilter');
     Route::get('/searchit','SearchController@showFilteredResult');
+    Route::get('/viewUsers','EmployeeController@showPaginatedList');
 
     Route::get('/showUsers','SearchController@showUsers');
     Route::get('/nextUsers/{id}','SearchController@nextUsers');

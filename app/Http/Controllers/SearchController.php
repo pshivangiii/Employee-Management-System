@@ -78,6 +78,12 @@ class SearchController extends Controller
             $users = array_slice($filter_data, $offset, $perPage);
             $users = new Paginator($users, $count, $perPage, $page, ['path'  => $request->url(),'query' => $request->query(),]);
             return view('filterview',['users' => $users]);
+            $search= $request->input('search');
+            if(!empty($search))
+           {
+            $data=EmployeeDetails::searchData($search);
+            return view('filter',['data'=> $data]);
+           }
     }
 
     public function showFilteredResult(Request $request)

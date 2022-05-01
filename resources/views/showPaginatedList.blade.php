@@ -14,16 +14,6 @@
         <div class="container">
             <h2>Search:</h2><br>
             <div>
-                <label for="search"><b>Search</b></label>
-                <input style="background-color:#bdbcb8;" type="text" placeholder="Enter Search" name="search" id="search" >
-                {{-- <button id = "bt" type="submit" >SEARCH</button> --}}
-                <button><a href = '/search'>SEARCH</a></button>
-                {{-- <form action="/searchit/{{}}" method="GET">
-                  {{ csrf_field() }}
-                  <input type="hidden" name="id">
-                  <button button style="background-color:#95d86f;" type="submit">search</button>
-                </form> --}}
-                </div><br>
             <table class="table table-bordered table-striped">
               <thead>
                <tr style="background-color:#aa9cdf;">

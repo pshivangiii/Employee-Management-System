@@ -26,8 +26,11 @@ Route::get('/nextUsers/{id}','SearchController@nextUsers');
 Route::get('/prevUsers/{id}','SearchController@prevUsers');
 
 //Manual Filter to filter out on the basis of team, designation, id and email
-Route::get('/search','SearchController@showfilter');
-Route::post('/search','SearchController@showFilteredResult');
+// Route::get('/search','SearchController@showfilter');
+// Route::get('/searchit','SearchController@showFilteredResult');
+
+Route::get('/viewUsers','SearchController@showfilter');
+
 
 Route::get('/showPayroll/{email}','PayrollController@showPayslip');
 
