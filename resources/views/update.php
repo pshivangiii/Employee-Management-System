@@ -17,7 +17,7 @@
                 <td>Reset Password</td>
                 <td>
                 <input type = 'text' name = 'psw' placeholder="Reset Password" 
-                value =  ''/></td>
+                value =  ''/></td> 
             </tr>
             <tr style="background-color:rgb(221, 241, 103);">>
                 <td>Team</td>
