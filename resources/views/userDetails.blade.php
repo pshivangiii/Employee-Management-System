@@ -17,7 +17,7 @@
     <form class ="row g-3" action="{{url('/')}}/show" method="POST">
         {{ csrf_field() }}
       <div class="container">
-          <h2 style="background-color:#b6d39b;">All Employees are:</h2>
+          <h2 style="background-color:#b891e5;">All Employees are:</h2>
           <input style="background-color:#ddd8c2;" class="form-control" id="myInput" type="text" placeholder="Search..">
           <br>
         <table class="table table-bordered table-striped">
@@ -47,10 +47,7 @@
                       </form>
                     </td>
                     <td style="background-color:#95d86f;">
-                        <form action="/edit/{{ $user->email}}" method="POST">
-                          {{ csrf_field() }}
-                          {{ method_field('PATCH') }}
-                          <input type="hidden" name="id">
+                        <form action="/edit/{{ $user->email}}" method="GET">
                           <button button style="background-color:#95d86f;" type="submit">Edit</button>
                         </form>
                     </td>
