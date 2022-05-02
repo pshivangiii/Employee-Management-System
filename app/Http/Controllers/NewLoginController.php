@@ -11,113 +11,6 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class NewLoginController extends Controller
 {
-    public function getLogin(Request $request)
-    {
-        // try
-        // {
-            $value = $request->session()->get('email');
-            if(!empty($value))
-            { 
-                $users=EmployeeDetails::getLogin($value,$request);
-                $email=$value;
-                $data=EmployeeDetails::getEmployeeData($email);
-                if($data->designation != 'Admin')
-                {
-                    return view('afterlogin')->with($users);
-                }
-                else{
-                    return view('features')->with($users);
-                }
-                
-                // return view('afterlogin')->with($users);
-            }
-            return view('newlogin');
-        // }
-        // catch (\Exception $e) 
-        // {
-        //     return redirect('error')->with
-        //     (
-        //    'error', $e->getMessage()
-        //     );
-        // }
-    }
-    public function postLogin(Request $request)
-    {
-        try
-        {
-            $email=$request->input('email');
-
-            $password=$request->input('password');
-
-            $users=EmployeeDetails::login($email,$password,$request);
-
-            if(isset($users))
-            {
-          
-                return view('afterlogin')->with($users);
-            }
-            else
-            {
-                return redirect('newlogin');
-            }
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }   
-    }
-
-    public function getAdminLogin(Request $request)
-    {
-        try
-        {
-            $value = $request->session()->get('email');
-            if(!empty($value))
-            { 
-                $users=AdminDetails::getLogin($value,$request);
-                return view('features')->with($users);
-            }   
-         return view('newAdminLogin');
-        }  
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
-
-    public function postAdminLogin(Request $request)
-    {
-        try
-        {
-            $email=$request->input('email');
-
-            $password=$request->input('password');
-
-            $users=AdminDetails::login($email,$password,$request);
-
-            if(isset($users))
-            {
-                return view('features')->with($users);
-            }
-            else
-            {
-                return view('newAdminLogin');
-            }
-        }
-        catch (\Exception $e) 
-        {
-            return redirect('error')->with
-            (
-               'error', $e->getMessage()
-            );
-        }
-    }
     public function getLoginPage(Request $request)
     {
         try
@@ -136,10 +29,6 @@ class NewLoginController extends Controller
                 {
                     return view('afterlogin')->with($users);
                 }
-
-
-                // $users=AdminDetails::getLogin($value,$request);
-                // return view('features')->with($users);
             }   
          return view('loginPage');
         }  
@@ -175,10 +64,6 @@ class NewLoginController extends Controller
                     return view('afterlogin')->with($users);
                 }
             }
-            else
-            {
-                return view('newAdminLogin');
-            }
         }
         catch (\Exception $e) 
         {
@@ -187,6 +72,7 @@ class NewLoginController extends Controller
                'error', $e->getMessage()
             );
         }
+        return redirect('/newlogin');
     }
   
 }

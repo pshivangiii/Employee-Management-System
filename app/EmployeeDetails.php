@@ -221,7 +221,7 @@ class EmployeeDetails extends Model
      */
     public static function loginUser($email,$password,$request)
     {
-        $check=EmployeeDetails::where(['email'=>$email])->get();
+        $check=Self::where(['email'=>$email,'password'=>$password])->get();
         if(count($check)>0)
            {
                 $users=$check;
