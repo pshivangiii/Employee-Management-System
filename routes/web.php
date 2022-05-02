@@ -55,7 +55,7 @@ Route::group(['middleware'=>'session'],function(){
     //Show and edit details
     Route::get('/ownprofile/{email}','FeaturesController@viewProfile');
     Route::get('/ownprofile/own/{email}','FeaturesController@showDetails');
-    Route::post('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
+    Route::patch('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
 
     //To add a new user
     Route::get('/userPortal','FeaturesController@viewAddUserPage');
