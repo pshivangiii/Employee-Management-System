@@ -63,7 +63,7 @@ Route::group(['middleware'=>'session'],function(){
 
     //Edit Employee's details
     Route::patch('edit/{email}','EmployeeController@showEmployeeDetail');
-    Route::post('editdetails/{email}','EmployeeController@editDetails');
+    Route::patch('editdetails/{email}','EmployeeController@editDetails');
 
 });
 
