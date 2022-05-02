@@ -47,10 +47,7 @@
                       </form>
                     </td>
                     <td style="background-color:#95d86f;">
-                        <form action="/edit/{{ $user->email}}" method="POST">
-                          {{ csrf_field() }}
-                          {{ method_field('PATCH') }}
-                          <input type="hidden" name="id">
+                        <form action="/edit/{{ $user->email}}" method="GET">
                           <button button style="background-color:#95d86f;" type="submit">Edit</button>
                         </form>
                     </td>

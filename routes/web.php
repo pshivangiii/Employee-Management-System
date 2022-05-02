@@ -58,38 +58,32 @@ Route::group(['middleware'=>'session'],function(){
     //Show and edit details
     Route::get('/ownprofile/{email}','FeaturesController@viewProfile');
     Route::get('/ownprofile/own/{email}','FeaturesController@showDetails');
-    Route::post('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
+    Route::patch('/ownprofile/own/{email}','FeaturesController@editOwnProfile');
  
     //To add a new user
     Route::get('/userPortal','FeaturesController@viewAddUserPage');
     Route::post('/userPortal','FeaturesController@addUser');
 
     //Edit Employee's details
-    Route::patch('edit/{email}','EmployeeController@showEmployeeDetail');
-    Route::post('editdetails/{email}','EmployeeController@editDetails'); 
+    Route::get('edit/{email}','EmployeeController@showEmployeeDetail');
+    Route::patch('editdetails/{email}','EmployeeController@editDetails'); 
 
 });
-
 
 Route::get('/registration','RegisterController@showRegPage');
 Route::post('/registration','RegisterController@registerAuthenticate');
 
-
 Route::get('/login','LoginController@showLoginPage');
 Route::post('/login','LoginController@authenticateLogin');
-
 
 Route::get('/adminRegistration','RegisterController@viewRegistrationPage');
 Route::post('/adminRegistration','RegisterController@authenticateRegistration');
 
-
 Route::get('/adminLogin','LoginController@showAdminLogin');
 Route::post('/adminLogin','LoginController@authenticateAdminLogin');
 
-
 Route::get('/logout','LoginController@showLogoutPage'); 
 Route::post('/logout','LoginController@logout'); 
-
 
 
 
@@ -151,4 +145,5 @@ Route::post('/logout','LoginController@logout');
 
 //     dd('sent');
 // });
+
 

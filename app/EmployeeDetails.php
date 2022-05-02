@@ -45,7 +45,7 @@ class EmployeeDetails extends Model
      */
     public static function login($email,$password)
     {
-        if((empty($email)) || (empty($password)))  
+        if((empty($email)) || (empty($password)))   
         {
             return null;
         }

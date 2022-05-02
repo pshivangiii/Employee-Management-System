@@ -29,8 +29,8 @@ Route::get('/prevUsers/{id}','SearchController@prevUsers');
 // Route::get('/search','SearchController@showfilter');
 // Route::get('/searchit','SearchController@showFilteredResult');
 
-Route::get('/viewUsers','SearchController@showfilter');
-
+Route::get('/search','SearchController@showfilter');
+Route::get('/searchit','SearchController@showFilteredResult');
 
 Route::get('/showPayroll/{email}','PayrollController@showPayslip');
 
