@@ -19,6 +19,6 @@ use Illuminate\Http\Request;
  });
 
 
-//Manual Filter with pagination to filter out on the basis of team, designation, id and email
-Route::get('/search','SearchController@showfilter');
-Route::post('/search','SearchController@showFilteredResult');
+Route::get('/viewUsers','SearchController@showfilter');
+
+Route::get('/showPayroll/{email}','PayrollController@showPayslip');
