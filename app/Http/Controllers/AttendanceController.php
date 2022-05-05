@@ -6,7 +6,7 @@ use App\Info;
 use App\EmployeeDetails;
 use App\AttendanceRecord;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ValidateRequest;
+use App\Http\Requests\AttendanceRequest;
 
 class AttendanceController extends Controller
 {

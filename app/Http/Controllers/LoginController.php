@@ -17,6 +17,7 @@ class LoginController extends Controller
             if(!empty($value))
             { 
                 $users=EmployeeDetails::getLogin($value);
+                $users=compact('users');
                 return view('afterlogin')->with($users);
             } 
         }
@@ -37,6 +38,7 @@ class LoginController extends Controller
             $email=$request->input('email');
             $password=$request->input('password');
             $users=EmployeeDetails::login($email,$password);
+            $users=compact('users');
 
             if(!isset($users))
             {

@@ -65,7 +65,8 @@ class EmployeeController extends Controller
             (
                'error', $e->getMessage()
             );
-        }  
+        }
+        
         return view('myteam',['users'=>$users]);    
     }
     public function showPaginatedList(Request $request)
@@ -74,16 +75,16 @@ class EmployeeController extends Controller
             $filter_data = []; 
             foreach($users as $row)
             {
-                array_push($filter_data, $row);
+                // array_push($filter_data, $row);
+                $filter_data[] = $row;
             }
             $count = count($filter_data); 
             $page = $request->page; 
-            $perPage = 3;
-            $offset = ($page-1) * $perPage;
-            $users = array_slice($filter_data, $offset, $perPage);
-            $users = new Paginator($users, $count, $perPage, $page, ['path'  => $request->url(),'query' => $request->query(),]);
+            $limit = $request->input("limit", 3);
+            $offset = ($page-1) * $limit;
+            $users = array_slice($filter_data, $offset, $limit);
+            $users = new Paginator($users, $count, $limit, $page, ['path'  => $request->url(),'query' => $request->query(),]);
             return view('showPaginatedList',['users' => $users]);
-            $search= $request->input('search'); 
     }
 }
 

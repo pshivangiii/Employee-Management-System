@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $designation=$request->input('designation'); 
         try
         {
-            EmployeeDetails::getRegistration($email,$password,$team,$designation);
+        $saveEmployee = EmployeeDetails::getRegistration($email,$password,$team,$designation);
         }
         catch (\Exception $e) 
         {
@@ -33,6 +33,12 @@ class RegisterController extends Controller
                'error', $e->getMessage()
             );
         }
+        
+        if (!$saveEmployee) 
+        {
+            return "Error in registering Employee";
+        }
+
         return view('newlogin');
     } 
 

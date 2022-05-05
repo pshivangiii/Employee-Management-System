@@ -25,7 +25,7 @@ class EmployeeDetails extends Model
      * @param String $team
      * @param String $designation
      */
-    public static function getRegistration($email,$password,$team,$designation)
+    public static function getRegistration($email, $password, $team, $designation)
     {
        if((empty($email)) || (empty($password)) || (empty($team)) || (empty($designation)))
        {
@@ -36,26 +36,26 @@ class EmployeeDetails extends Model
         $reg->password=$password;
         $reg->team=$team;
         $reg->designation=$designation; 
-        $reg->save();
+        return $reg->save();
     }
 
      /**
      * @param String $email
      * @param String $password
      */
-    public static function login($email,$password)
+    public static function login($email, $password)
     {
         if((empty($email)) || (empty($password)))   
         {
             return null;
         }
          $check=Self::where(['email'=>$email,'password'=>$password])->get();
-         if(count($check)>0)
-                {
-                    $users=$check;
-                    $users=compact('users');
-                    return $users;
-                }      
+         if(count($check)<0)
+            {
+                return null;  
+            }  
+        $users=$check;
+        return $users;  
     }
 
      /**
@@ -68,12 +68,12 @@ class EmployeeDetails extends Model
             return null;
         }
         $check=Self::where(['email'=>$email])->get();
-        if(count($check)>0)
-               {
-                   $users=$check;
-                   $users=compact('users');
-                   return $users;
-               }
+        if(count($check)<0)
+        {
+            return null;
+        }
+        $users=$check;
+        return $users;        
     }
 
       /**
@@ -89,6 +89,11 @@ class EmployeeDetails extends Model
         return $data;
     }
 
+    // public static function getPaginatedData($limit)
+    // {
+    //     $users=Self::paginate($limit);
+    //     return $users;
+    // }
     public static function getPaginatedData()
     {
         $users=Self::paginate(3);
@@ -99,7 +104,7 @@ class EmployeeDetails extends Model
      * @param String $email
      * @param String $attendance
      */    
-    public static function markAttendance($email,$attendance)
+    public static function markAttendance($email, $attendance)
     {
         if((empty($email)) || (empty($attendance)))
         {
@@ -140,7 +145,7 @@ class EmployeeDetails extends Model
      * @param String $team
      * @param String $designation
      */
-    public static function updateProfile($id,$email,$password,$team,$designation)
+    public static function updateProfile($id, $email, $password, $team, $designation)
     {
         if((empty($id)) || (empty($email)) || (empty($password)) || (empty($team)) || (empty($designation)))
         {  
@@ -160,7 +165,7 @@ class EmployeeDetails extends Model
      * @param String $password
      * @param int $approved
      */
-    public static function updateAttendance($email,$attendance,$approved)
+    public static function updateAttendance($email, $attendance, $approved)
     {
         if((empty($email)) || (empty($attendance)) || (empty($approved)))
         {
@@ -219,7 +224,7 @@ class EmployeeDetails extends Model
      * @param String $email
      * @param String $password
      */
-    public static function loginUser($email,$password,$request)
+    public static function loginUser($email, $password, $request)
     {
         $check=Self::where(['email'=>$email,'password'=>$password])->get();
         if(count($check)>0)

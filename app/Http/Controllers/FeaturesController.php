@@ -40,11 +40,26 @@ class FeaturesController extends Controller
         return redirect('/adminLogin')->with('status', 'Updated Successfully');
     }
 
+    // public function showEmployees($limit)
+    // {
+    //     try
+    //     {
+    //         $users=EmployeeDetails::getPaginatedData($limit);
+    //     }
+    //     catch (\Exception $e) 
+    //     {
+    //         return redirect('error')->with
+    //         (
+    //            'error', $e->getMessage()
+    //         );
+    //     }
+    //     return view('userDetails',['users'=> $users]);
+    // }
     public function showEmployees()
     {
         try
         {
-            $users=EmployeeDetails::getPaginatedData();
+            $users=EmployeeDetails::getPaginatedData(3);
         }
         catch (\Exception $e) 
         {
@@ -76,11 +91,19 @@ class FeaturesController extends Controller
         return redirect('/show')->with('status', 'Deleted Successfully');
     }
 
-    public function showAllEmployees()
+    public function showAllEmployees(Request $request)
     {
+        $limit=$request->input('limit', 3);
         try
         {
-            $users=EmployeeDetails::getPaginatedData();
+            if(!empty($limit))
+            
+                $users=EmployeeDetails::getPaginatedData($limit);
+            
+            // else
+            // {
+            // $users=EmployeeDetails::getPaginatedData(3);
+            // }
         }
         catch (\Exception $e) 
         {
@@ -114,7 +137,7 @@ class FeaturesController extends Controller
                'error', $e->getMessage()
             );
         }
-        return view('viewOwnProfile',['users'=>$users]); 
+        return view('viewOwnProfile', compact('users')); 
     }
 
     public function showDetails($email)

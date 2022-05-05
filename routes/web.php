@@ -33,6 +33,7 @@ Route::group(['middleware'=>'session'],function(){
     Route::get('/payroll_details/{email}','PayrollController@showPayslip');
 
     //Show users and delete operation
+    // Route::get('show/{limit}','FeaturesController@showEmployees');
     Route::get('show','FeaturesController@showEmployees');
     Route::delete('/show/{id}','FeaturesController@deleteEmployee');
     
@@ -129,9 +130,7 @@ Route::post('/logout','LoginController@logout');
     Route::get('/nextUsers/{id}','SearchController@nextUsers');
     Route::get('/prevUsers/{id}','SearchController@prevUsers');
 
-    Route::get('/dash',function(){
-        return view('newDashboard');
-    });
+    Route::get('/dash','NewRegistrationController@getDashboard'); 
 
 
 

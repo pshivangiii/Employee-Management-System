@@ -87,4 +87,8 @@ class NewRegistrationController extends Controller
             return redirect('/newlogin');
         
     } 
+    public function getDashboard()
+    {
+        return view('newDashboard');
+    }
 }
